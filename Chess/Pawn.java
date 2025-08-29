@@ -1,0 +1,99 @@
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.util.ArrayList;
+import javax.imageio.ImageIO;
+
+public class Pawn extends Piece {
+
+    BufferedImage blackPawn;
+    BufferedImage whitePawn;
+
+    public Pawn(int x, int y, int id) {
+        super(x, y, id, 'p');
+
+        try {
+            blackPawn = ImageIO.read(new File("Photos/blackPawn.png"));
+            whitePawn = ImageIO.read(new File("Photos/whitePawn.png"));
+        } catch (IOException e) {
+        }
+    }
+
+    public char getType() {
+        return type;
+    }
+
+    public void draw(Graphics g) {
+
+        if (id <= 8) {
+            if (blackPawn != null) {
+                g.drawImage(blackPawn, super.x, super.y, width, height, null);
+            }
+        } else if (id <= 16) {
+            if (whitePawn != null) {
+                g.drawImage(whitePawn, super.x, super.y, width, height, null);
+            }
+
+        } else {
+            g.setColor(Color.BLACK);
+            g.fillRect(super.x, super.y, width, height);
+        }
+    }
+
+    @Override
+    public ArrayList<MoveOption> getMoves() {
+        // System.out.println("This method is being run");
+        ArrayList<MoveOption> answer = new ArrayList<>();
+        int multiplier = -1;
+
+        Piece newPiece = getPiece(x, y);
+
+        int pieceId = newPiece.getId();
+        // System.out.println("PieceId: " + pieceId);
+        if (pieceId > 8 && pieceId <= 16) {
+            multiplier = 1;
+            // System.out.println("White Piece");
+        } else {
+            // System.out.println("Black Piece");
+        }
+
+        int moveX = x / GamePanel.PIECE_SIZE;
+        int moveY1 = y / GamePanel.PIECE_SIZE - (1 * multiplier);
+        int moveY2 = y / GamePanel.PIECE_SIZE - (2 * multiplier);
+
+        // moving forward
+        if (moveX >= 0 && moveX <= GamePanel.NUM_TILES - 1) {
+            if (moveY1 >= 0 && moveY1 <= GamePanel.NUM_TILES - 1) {
+                if (!Piece.spaceIsOccupied(moveX, moveY1, pieceId)) {
+                    answer.add(new MoveOption(moveX, moveY1));
+                }
+            }
+            if ((moveY2 >= 0 && moveY2 <= GamePanel.NUM_TILES - 1)
+                    && (!Piece.spaceIsOccupied(moveX, moveY1, pieceId)) && !hadFirstTurn) {
+                if (!Piece.spaceIsOccupied(moveX, moveY2, pieceId)) {
+                    answer.add(new MoveOption(moveX, moveY2));
+                }
+            }
+        }
+
+        // capturing diagonally
+        if (moveY1 >= 0 && moveY1 <= GamePanel.NUM_TILES - 1) {
+            if (moveX - 1 >= 0 && moveX - 1 <= GamePanel.NUM_TILES - 1) {
+                if (Piece.spaceIsOccupied(moveX - 1, moveY1, newPiece.getId())) {
+                    answer.add(new MoveOption(moveX - 1, moveY1));
+                }
+            }
+
+            if (moveX + 1 >= 0 && moveX + 1 <= GamePanel.NUM_TILES - 1) {
+                if (Piece.spaceIsOccupied(moveX + 1, moveY1, newPiece.getId())) {
+                    answer.add(new MoveOption(moveX + 1, moveY1));
+                }
+            }
+
+        }
+
+        System.out.println(answer);
+        return answer;
+    }
+
+}

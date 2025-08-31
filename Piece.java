@@ -12,18 +12,18 @@ public abstract class Piece extends Rectangle {
     int startMouseY;
     int startPieceX;
     int startPieceY;
-    int basicX;
-    int basicY;
+    int row;
+    int col;
     char type;
     boolean hadFirstTurn = false;
 
-    public Piece(int x, int y, int id, char type) {
-        super(x, y, GamePanel.PIECE_SIZE, GamePanel.PIECE_SIZE);
-        this.x = x;
-        this.y = y;
+    public Piece(int displayX, int displayY, int id, char type) {
+        super(displayX, displayY, GamePanel.PIECE_SIZE, GamePanel.PIECE_SIZE);
+        this.x = displayX;
+        this.y = displayY;
         this.id = id;
-        this.basicX = x / GamePanel.PIECE_SIZE;
-        this.basicY = y / GamePanel.PIECE_SIZE;
+        this.col = x / GamePanel.PIECE_SIZE;
+        this.row = y / GamePanel.PIECE_SIZE;
         this.type = type;
     }
 
@@ -77,7 +77,7 @@ public abstract class Piece extends Rectangle {
             } else {
                 System.out.println("clicked on new piece");
 
-                MoveOption move = new MoveOption(this.basicX, this.basicY);
+                MoveOption move = new MoveOption(this.col, this.row);
 
                 if (GamePanel.movesList.contains(move)) {
                     GamePanel.pieceList.remove(this);
@@ -124,10 +124,10 @@ public abstract class Piece extends Rectangle {
 
     public void teleportPiece(MoveOption move) {
         System.out.println("TELEPORTING PIECE");
-        GamePanel.selectedPiece.x = move.x * GamePanel.PIECE_SIZE;
-        GamePanel.selectedPiece.y = move.y * GamePanel.PIECE_SIZE;
-        GamePanel.selectedPiece.basicX = move.x;
-        GamePanel.selectedPiece.basicY = move.y;
+        GamePanel.selectedPiece.x = move.col * GamePanel.PIECE_SIZE;
+        GamePanel.selectedPiece.y = move.row * GamePanel.PIECE_SIZE;
+        GamePanel.selectedPiece.col = move.col;
+        GamePanel.selectedPiece.row = move.row;
     }
 
     public void mouseReleased(MouseEvent e) {
@@ -144,8 +144,8 @@ public abstract class Piece extends Rectangle {
         int[] closestSpaceArr = findClosestSpace(x, y);
         if (pieceIsSelected) {
             System.out.println("PieceIsSelected");
-            basicX = closestSpaceArr[0];
-            basicY = closestSpaceArr[1];
+            row = closestSpaceArr[0];
+            col = closestSpaceArr[1];
             // System.out.println("New Location X: " + basicX + " Y: " + basicY);
 
             // System.out.println("Available moves: " + GamePanel.movesList);
@@ -252,7 +252,7 @@ public abstract class Piece extends Rectangle {
         boolean answer = false;
         for (Piece elem : GamePanel.pieceList) {
             if (elem.id != id) {
-                if (elem.basicX == x && elem.basicY == y) {
+                if (elem.col == x && elem.row == y) {
                     answer = true;
                     System.out.println("Piece was stopped by: " + elem.id);
                     break;

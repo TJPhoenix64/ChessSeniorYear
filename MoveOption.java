@@ -2,20 +2,20 @@ import java.awt.*;
 import java.util.*;
 
 public class MoveOption {
-    int x;
-    int y;
+    int col;
+    int row;
     int widthHeight = 40;
     int centerX;
     int centerY;
 
     /**
      * 
-     * @param x basic version of x, eg 5 or 6, not 500 or 600
-     * @param y basic y
+     * @param col - the coloum/x position
+     * @param row - the row/y position
      */
-    public MoveOption(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public MoveOption(int col, int row) {
+        this.col = col;
+        this.row = row;
     }
 
     public void draw(Graphics g) {
@@ -23,16 +23,16 @@ public class MoveOption {
         Color tylerGray = new Color(0, 0, 0, 160);
         g2.setColor(tylerGray);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        centerX = x * 100 + 50 - widthHeight / 2;
-        centerY = y * 100 + 50 - widthHeight / 2;
+        centerX = col * 100 + 50 - widthHeight / 2;
+        centerY = row * 100 + 50 - widthHeight / 2;
         g2.fillOval(centerX, centerY, widthHeight, widthHeight);
     }
 
     @Override
     public String toString() {
         String answer = "";
-        answer += "MoveX: " + x;
-        answer += " MoveY: " + y;
+        answer += "MoveX: " + col;
+        answer += " MoveY: " + row;
         return answer;
     }
 
@@ -48,12 +48,12 @@ public class MoveOption {
         MoveOption other = (MoveOption) obj; // the new move option
         // System.out.println("Equals Method: ");
         // System.out.println(this.x + " " + other.x + " " + this.y + " " + other.y);
-        return this.x == other.x && this.y == other.y;
+        return this.col == other.col && this.row == other.row;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        return Objects.hash(col, row);
     }
 
 }

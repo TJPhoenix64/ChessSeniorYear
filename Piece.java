@@ -99,13 +99,13 @@ public abstract class Piece extends Rectangle {
         }
     }
 
-    public static Piece getPiece(int x, int y) {
+    public static Piece getPiece(int col, int row) {
         Piece checkPiece = GamePanel.pieceList.get(0);
         // System.out.println("getPiece X: " + x + " Y: " + y);
         for (int i = 0; i < GamePanel.pieceList.size(); i++) {
             checkPiece = GamePanel.pieceList.get(i);
 
-            if (checkPiece.x == x && checkPiece.y == y) {
+            if (checkPiece.col == col && checkPiece.row == row) {
                 break;
             }
         }
@@ -248,11 +248,13 @@ public abstract class Piece extends Rectangle {
      * @param id current piece id
      * @return returns true if space is occupied, else false
      */
-    public static boolean spaceIsOccupied(int x, int y, int id) {
+    public static boolean spaceIsOccupied(int col, int row, int id) {
         boolean answer = false;
         for (Piece elem : GamePanel.pieceList) {
             if (elem.id != id) {
-                if (elem.col == x && elem.row == y) {
+                // System.out.println("Occupied Check:" + elem.col + " " + col + " " + elem.row
+                // + " " + row);
+                if (elem.col == col && elem.row == row) {
                     answer = true;
                     System.out.println("Piece was stopped by: " + elem.id);
                     break;
@@ -260,6 +262,11 @@ public abstract class Piece extends Rectangle {
             }
         }
         return answer;
+    }
+
+    public static boolean spaceIsInBounds(int col, int row) {
+        System.out.println("Checking: " + col + " " + row);
+        return (col >= 0 && col < GamePanel.NUM_TILES && row >= 0 && row < GamePanel.NUM_TILES);
     }
 
     public abstract ArrayList<MoveOption> getMoves();
@@ -288,6 +295,8 @@ public abstract class Piece extends Rectangle {
         String answer = "";
         if (type == 'p') {
             answer += "Pawn, ";
+        } else if (type == 'r') {
+            answer += "Rook, ";
         }
         answer += "X: " + x + " Y: " + y + " ID: " + id;
         return answer;

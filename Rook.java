@@ -45,25 +45,68 @@ public class Rook extends Piece {
     public ArrayList<MoveOption> getMoves() {
         ArrayList<MoveOption> answer = new ArrayList<>();
 
-        Piece newPiece = getPiece(x, y);
+        Piece newPiece = getPiece(col, row);
 
         int pieceId = newPiece.getId();
-        int newX = x;
-        int newY = y;
+        int pieceCol = newPiece.col;
+        int pieceRow = newPiece.row;
+        System.out.println("Col: " + pieceCol + " Row: " + pieceRow);
+
+        // System.out.println("Getting rook moves");
+
         boolean hasHitPiece = false;
-        System.out.println("Getting rook moves");
-        for (int i = GamePanel.NUM_TILES; i >= 0; i--) {
-            if (!hasHitPiece) {
-                System.out.println("current rook has not hit a piece");
-                if (!Piece.spaceIsOccupied(newX, newY - (i * 100), pieceId)) {
-                    System.out.println(newX + " " + (newY - (i * 100)));
-                    System.out.println("MoveOptions: " + (newX / 100) + " " + (newY / 100 - i));
-                    answer.add(new MoveOption(newX / 100, newY / 100 - i));
-                } else {
-                    hasHitPiece = true;
-                }
+        int checkX = pieceCol;
+        int checkY = pieceRow - 1;
+        // System.out.println("Up");
+        while (!hasHitPiece) {
+            if (!Piece.spaceIsOccupied(checkX, checkY, pieceId) && spaceIsInBounds(checkX, checkY)) {
+                answer.add(new MoveOption(checkX, checkY));
+                checkY--;
+            } else {
+                hasHitPiece = true;
+
             }
         }
+        hasHitPiece = false;
+        checkY = newPiece.row + 1;
+        // System.out.println("Down");
+        while (!hasHitPiece) {
+            if (!Piece.spaceIsOccupied(checkX, checkY, pieceId) && spaceIsInBounds(checkX, checkY)) {
+                answer.add(new MoveOption(checkX, checkY));
+                checkY++;
+            } else {
+                hasHitPiece = true;
+            }
+        }
+        hasHitPiece = false;
+        checkY = newPiece.row;
+        checkX--;
+        // System.out.println("Left");
+        while (!hasHitPiece) {
+            if (!Piece.spaceIsOccupied(checkX, checkY, pieceId) && spaceIsInBounds(checkX, checkY)) {
+                answer.add(new MoveOption(checkX, checkY));
+                checkX--;
+            } else {
+                hasHitPiece = true;
+            }
+        }
+        hasHitPiece = false;
+        checkX = newPiece.col + 1;
+        // System.out.println("Right");
+        while (!hasHitPiece) {
+            if (!Piece.spaceIsOccupied(checkX, checkY, pieceId) && spaceIsInBounds(checkX, checkY)) {
+                answer.add(new MoveOption(checkX, checkY));
+                checkX++;
+            } else {
+                hasHitPiece = true;
+            }
+        }
+
+        // 5,5
+        // 4,5;3,5;2,5;1,5;0,5
+        // 6,5;7,5;8,5
+        // 5,6;5,7;5,8;5,8
+        // 5,4;5,3;5,2;5,1;5,0
 
         return answer;
     }

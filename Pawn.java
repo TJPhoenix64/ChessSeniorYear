@@ -38,10 +38,12 @@ public class Pawn extends Piece {
         if (id <= 8) {
             if (blackPawn != null) {
                 g.drawImage(blackPawn, super.x, super.y, width, height, null);
+                isWhite = false;
             }
         } else if (id <= 16) {
             if (whitePawn != null) {
                 g.drawImage(whitePawn, super.x, super.y, width, height, null);
+                isWhite = true;
             }
 
         } else {

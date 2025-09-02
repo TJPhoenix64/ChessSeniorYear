@@ -52,6 +52,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void newPieces() {
         newPawns();
         newRooks();
+        newBishops();
     }
 
     public void newPawns() {
@@ -73,6 +74,13 @@ public class GamePanel extends JPanel implements Runnable {
         pieceList.add(new Rook(NUM_TILES - 1, NUM_TILES - 1, 20));
     }
 
+    public void newBishops() {
+        pieceList.add(new Bishop(2, 0, 21));
+        pieceList.add(new Bishop(NUM_TILES - 3, 0, 22));
+        pieceList.add(new Bishop(2, 7, 23));
+        pieceList.add(new Bishop(NUM_TILES - 3, 7, 24));
+    }
+
     @Override
     public void paint(Graphics g) {
         image = createImage(getWidth(), getHeight());
@@ -90,11 +98,7 @@ public class GamePanel extends JPanel implements Runnable {
             elem.draw(g);
         }
         for (Piece elem : pieceList) {
-            if (elem.id <= 16) {
-                elem.draw(g);
-            } else if (elem.id <= 20) {
-                elem.draw(g);
-            }
+            elem.draw(g);
         }
 
     }

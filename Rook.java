@@ -60,14 +60,11 @@ public class Rook extends Piece {
         int pieceId = newPiece.getId();
         int pieceCol = newPiece.col;
         int pieceRow = newPiece.row;
-        System.out.println("Col: " + pieceCol + " Row: " + pieceRow);
-
-        // System.out.println("Getting rook moves");
 
         boolean hasHitPiece = false;
         int checkX = pieceCol;
         int checkY = pieceRow - 1;
-        // System.out.println("Up");
+        // up
         while (!hasHitPiece) {
             if (!Piece.spaceIsOccupied(checkX, checkY, pieceId) && spaceIsInBounds(checkX, checkY)) {
                 answer.add(new MoveOption(checkX, checkY));
@@ -79,7 +76,7 @@ public class Rook extends Piece {
         }
         hasHitPiece = false;
         checkY = newPiece.row + 1;
-        // System.out.println("Down");
+        // down
         while (!hasHitPiece) {
             if (!Piece.spaceIsOccupied(checkX, checkY, pieceId) && spaceIsInBounds(checkX, checkY)) {
                 answer.add(new MoveOption(checkX, checkY));
@@ -90,8 +87,8 @@ public class Rook extends Piece {
         }
         hasHitPiece = false;
         checkY = newPiece.row;
-        checkX--;
-        // System.out.println("Left");
+        checkX = newPiece.col - 1;
+        // left
         while (!hasHitPiece) {
             if (!Piece.spaceIsOccupied(checkX, checkY, pieceId) && spaceIsInBounds(checkX, checkY)) {
                 answer.add(new MoveOption(checkX, checkY));
@@ -102,7 +99,7 @@ public class Rook extends Piece {
         }
         hasHitPiece = false;
         checkX = newPiece.col + 1;
-        // System.out.println("Right");
+        // right
         while (!hasHitPiece) {
             if (!Piece.spaceIsOccupied(checkX, checkY, pieceId) && spaceIsInBounds(checkX, checkY)) {
                 answer.add(new MoveOption(checkX, checkY));
@@ -111,12 +108,6 @@ public class Rook extends Piece {
                 hasHitPiece = true;
             }
         }
-
-        // 5,5
-        // 4,5;3,5;2,5;1,5;0,5
-        // 6,5;7,5;8,5
-        // 5,6;5,7;5,8;5,8
-        // 5,4;5,3;5,2;5,1;5,0
 
         return answer;
     }

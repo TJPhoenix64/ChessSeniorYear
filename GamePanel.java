@@ -50,9 +50,8 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void newPieces() {
-        // newPawns();
-        // newRooks();
-        pieceList.add(new Rook(NUM_TILES - 1, NUM_TILES - 1, 20));
+        newPawns();
+        newRooks();
 
     }
 

@@ -9,9 +9,18 @@ public class Rook extends Piece {
     BufferedImage blackRook;
     BufferedImage whiteRook;
 
-    public Rook(int x, int y, int id) {
-        super(x, y, id, 'r');
+    public Rook(int col, int row, int id) {
+        super(col, row, id, 'r');
 
+        try {
+            blackRook = ImageIO.read(new File("Photos/black-rook.png"));
+            whiteRook = ImageIO.read(new File("Photos/white-rook.png"));
+        } catch (IOException e) {
+        }
+    }
+
+    public Rook(int displayX, int displayY, int id, boolean isMoving) {
+        super(displayX, displayY, id, 'r', isMoving);
         try {
             blackRook = ImageIO.read(new File("Photos/black-rook.png"));
             whiteRook = ImageIO.read(new File("Photos/white-rook.png"));

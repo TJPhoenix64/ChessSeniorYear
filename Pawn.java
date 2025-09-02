@@ -9,9 +9,18 @@ public class Pawn extends Piece {
     BufferedImage blackPawn;
     BufferedImage whitePawn;
 
-    public Pawn(int x, int y, int id) {
-        super(x, y, id, 'p');
+    public Pawn(int col, int row, int id) {
+        super(col, row, id, 'p');
 
+        try {
+            blackPawn = ImageIO.read(new File("Photos/blackPawn.png"));
+            whitePawn = ImageIO.read(new File("Photos/whitePawn.png"));
+        } catch (IOException e) {
+        }
+    }
+
+    public Pawn(int displayX, int displayY, int id, boolean isMoving) {
+        super(displayX, displayY, id, 'p', isMoving);
         try {
             blackPawn = ImageIO.read(new File("Photos/blackPawn.png"));
             whitePawn = ImageIO.read(new File("Photos/whitePawn.png"));
@@ -46,7 +55,7 @@ public class Pawn extends Piece {
         ArrayList<MoveOption> answer = new ArrayList<>();
         int multiplier = -1;
 
-        Piece newPiece = getPiece(x, y);
+        Piece newPiece = getPiece(col, row);
 
         int pieceId = newPiece.getId();
         // System.out.println("PieceId: " + pieceId);
@@ -57,9 +66,9 @@ public class Pawn extends Piece {
             // System.out.println("Black Piece");
         }
 
-        int moveX = x / GamePanel.PIECE_SIZE;
-        int moveY1 = y / GamePanel.PIECE_SIZE - (1 * multiplier);
-        int moveY2 = y / GamePanel.PIECE_SIZE - (2 * multiplier);
+        int moveX = col;
+        int moveY1 = row - (1 * multiplier);
+        int moveY2 = row - (2 * multiplier);
 
         // moving forward
         if (moveX >= 0 && moveX <= GamePanel.NUM_TILES - 1) {

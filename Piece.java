@@ -17,14 +17,25 @@ public abstract class Piece extends Rectangle {
     char type;
     boolean hadFirstTurn = false;
 
-    public Piece(int displayX, int displayY, int id, char type) {
+    public Piece(int col, int row, int id, char type) {
+        super(col * GamePanel.PIECE_SIZE, row * GamePanel.PIECE_SIZE, GamePanel.PIECE_SIZE, GamePanel.PIECE_SIZE);
+        this.x = col * GamePanel.PIECE_SIZE;
+        this.y = row * GamePanel.PIECE_SIZE;
+        this.id = id;
+        this.col = col;
+        this.row = row;
+        this.type = type;
+    }
+
+    public Piece(int displayX, int displayY, int id, char type, boolean isMoving) {
         super(displayX, displayY, GamePanel.PIECE_SIZE, GamePanel.PIECE_SIZE);
         this.x = displayX;
         this.y = displayY;
         this.id = id;
-        this.col = x / GamePanel.PIECE_SIZE;
-        this.row = y / GamePanel.PIECE_SIZE;
+        this.col = displayX / 100;
+        this.row = displayY / 100;
         this.type = type;
+
     }
 
     public int getId() {
@@ -144,8 +155,8 @@ public abstract class Piece extends Rectangle {
         int[] closestSpaceArr = findClosestSpace(x, y);
         if (pieceIsSelected) {
             System.out.println("PieceIsSelected");
-            row = closestSpaceArr[0];
-            col = closestSpaceArr[1];
+            col = closestSpaceArr[0];
+            row = closestSpaceArr[1];
             // System.out.println("New Location X: " + basicX + " Y: " + basicY);
 
             // System.out.println("Available moves: " + GamePanel.movesList);

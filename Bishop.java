@@ -53,24 +53,22 @@ public class Bishop extends Piece {
     @Override
     public void draw(Graphics g) {
         switch (id) {
-            case 21:
-            case 22:
+            case 21, 22 -> {
                 if (blackBishop != null) {
                     g.drawImage(blackBishop, super.x, super.y, width, height, null);
                     isWhite = false;
                 }
-                break;
-            case 23:
-            case 24:
+            }
+            case 23, 24 -> {
                 if (whiteBishop != null) {
                     g.drawImage(whiteBishop, super.x, super.y, width, height, null);
                     isWhite = true;
                 }
-                break;
-            default:
+            }
+            default -> {
                 g.setColor(Color.BLACK);
                 g.fillRect(super.x, super.y, width, height);
-                break;
+            }
         }
     }
 

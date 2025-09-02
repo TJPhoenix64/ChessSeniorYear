@@ -32,24 +32,22 @@ public class Rook extends Piece {
     public void draw(Graphics g) {
 
         switch (id) {
-            case 17:
-            case 18:
+            case 17, 18 -> {
                 if (blackRook != null) {
                     g.drawImage(blackRook, super.x, super.y, width, height, null);
                     isWhite = false;
                 }
-                break;
-            case 19:
-            case 20:
+            }
+            case 19, 20 -> {
                 if (whiteRook != null) {
                     g.drawImage(whiteRook, super.x, super.y, width, height, null);
                     isWhite = true;
                 }
-                break;
-            default:
+            }
+            default -> {
                 g.setColor(Color.BLACK);
                 g.fillRect(super.x, super.y, width, height);
-                break;
+            }
         }
     }
 

@@ -93,9 +93,9 @@ public class GamePanel extends JPanel implements Runnable {
         }
         for (Piece elem : pieceList) {
             if (elem.id <= 16) {
-                new Pawn(elem.x, elem.y, elem.id, true).draw(g);
+                elem.draw(g);
             } else if (elem.id <= 20) {
-                new Rook(elem.x, elem.y, elem.id, true).draw(g);
+                elem.draw(g);
             }
         }
 

@@ -112,8 +112,6 @@ public class GamePanel extends JPanel implements Runnable {
             delta += (now - lastTime) / ns;
             lastTime = now;
             if (delta >= 1) {
-
-                // checkCollisions();
                 repaint();
                 delta--;
             }

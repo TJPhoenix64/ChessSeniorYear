@@ -54,6 +54,7 @@ public class GamePanel extends JPanel implements Runnable {
         newRooks();
         newBishops();
         newQueens();
+        newKnights();
     }
 
     public void newPawns() {
@@ -85,6 +86,13 @@ public class GamePanel extends JPanel implements Runnable {
     public void newQueens() {
         pieceList.add(new Queen(4, 0, 25));
         pieceList.add(new Queen(4, 7, 26));
+    }
+
+    public void newKnights() {
+        pieceList.add(new Knight(6, 0, 27));
+        pieceList.add(new Knight(1, 0, 28));
+        pieceList.add(new Knight(6, 7, 29));
+        pieceList.add(new Knight(1, 7, 30));
     }
 
     @Override

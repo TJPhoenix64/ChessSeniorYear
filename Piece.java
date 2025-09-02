@@ -15,6 +15,7 @@ public abstract class Piece extends Rectangle {
     int row;
     int col;
     char type;
+    boolean isWhite;
     boolean hadFirstTurn = false;
 
     public Piece(int col, int row, int id, char type) {
@@ -40,6 +41,10 @@ public abstract class Piece extends Rectangle {
 
     public int getId() {
         return id;
+    }
+
+    public boolean isWhite() {
+        return isWhite;
     }
 
     public boolean hadFirstTurn() {
@@ -131,6 +136,28 @@ public abstract class Piece extends Rectangle {
             GamePanel.movesList.add(elem);
             System.out.println(elem);
         }
+    }
+
+    protected void addMovesInDirection(ArrayList<MoveOption> answer, int startX, int startY, int dx, int dy, int id) {
+        int checkX = startX + dx;
+        int checkY = startY + dy;
+
+        while (true) {
+            if (!spaceIsInBounds(checkX, checkY)) {
+                break;
+            }
+            if (!Piece.spaceIsOccupied(checkX, checkY, id)) {
+                answer.add(new MoveOption(checkX, checkY));
+                checkX += dx;
+                checkY += dy;
+            } else if (Piece.getPiece(checkX, checkY).isWhite != this.isWhite) {
+                answer.add(new MoveOption(checkX, checkY));
+                break;
+            } else {
+                break;
+            }
+        }
+
     }
 
     public void teleportPiece(MoveOption move) {

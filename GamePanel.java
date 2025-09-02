@@ -94,10 +94,11 @@ public class GamePanel extends JPanel implements Runnable {
         if (background != null) {
             g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
         }
-        for (MoveOption elem : movesList) {
+
+        for (Piece elem : pieceList) {
             elem.draw(g);
         }
-        for (Piece elem : pieceList) {
+        for (MoveOption elem : movesList) {
             elem.draw(g);
         }
 

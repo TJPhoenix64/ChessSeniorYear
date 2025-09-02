@@ -28,6 +28,7 @@ public class Rook extends Piece {
         }
     }
 
+    @Override
     public void draw(Graphics g) {
 
         switch (id) {

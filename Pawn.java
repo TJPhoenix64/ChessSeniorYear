@@ -32,6 +32,7 @@ public class Pawn extends Piece {
         return type;
     }
 
+    @Override
     public void draw(Graphics g) {
 
         if (id <= 8) {

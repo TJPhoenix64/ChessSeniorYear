@@ -73,6 +73,23 @@ public class King extends Piece {
 
     }
 
+    public boolean canCastle(int rookX, int rookY) {
+        if (!hadFirstTurn) {
+            return false;
+        }
+        Piece rook = getPiece(rookX, rookY);
+        if (!rook.hadFirstTurn) {
+            return false;
+        }
+        if (rookX > this.col) {
+            if (getPiece(col + 1, row) != null && getPiece(col + 2, row) != null) {
+
+            }
+        }
+
+        return true;
+    }
+
     @Override
     public void draw(Graphics g) {
         switch (id) {

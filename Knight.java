@@ -16,7 +16,7 @@ public class Knight extends Piece {
 
         try {
             blackKnight = ImageIO.read(new File("Photos/black-knight.png"));
-            whiteKnight = ImageIO.read(new File("Photos/white-rook.png"));
+            whiteKnight = ImageIO.read(new File("Photos/white-knight.png"));
         } catch (IOException e) {
         }
     }
@@ -25,7 +25,7 @@ public class Knight extends Piece {
         super(col, row, id, 'k');
         try {
             blackKnight = ImageIO.read(new File("Photos/black-knight.png"));
-            whiteKnight = ImageIO.read(new File("Photos/white-rook.png"));
+            whiteKnight = ImageIO.read(new File("Photos/white-knight.png"));
         } catch (IOException e) {
         }
     }

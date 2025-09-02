@@ -13,8 +13,8 @@ public class Pawn extends Piece {
         super(col, row, id, 'p');
 
         try {
-            blackPawn = ImageIO.read(new File("Photos/blackPawn.png"));
-            whitePawn = ImageIO.read(new File("Photos/whitePawn.png"));
+            blackPawn = ImageIO.read(new File("Photos/black-pawn.png"));
+            whitePawn = ImageIO.read(new File("Photos/white-pawn.png"));
         } catch (IOException e) {
         }
     }
@@ -22,8 +22,8 @@ public class Pawn extends Piece {
     public Pawn(int displayX, int displayY, int id, boolean isMoving) {
         super(displayX, displayY, id, 'p', isMoving);
         try {
-            blackPawn = ImageIO.read(new File("Photos/blackPawn.png"));
-            whitePawn = ImageIO.read(new File("Photos/whitePawn.png"));
+            blackPawn = ImageIO.read(new File("Photos/black-pawn.png"));
+            whitePawn = ImageIO.read(new File("Photos/white-pawn.png"));
         } catch (IOException e) {
         }
     }

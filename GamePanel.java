@@ -43,7 +43,7 @@ public class GamePanel extends JPanel implements Runnable {
         gameThread.start();
 
         try {
-            background = ImageIO.read(new File("Photos/chessBoard.png"));
+            background = ImageIO.read(new File("Photos/chess-board.png"));
         } catch (IOException e) {
         }
 

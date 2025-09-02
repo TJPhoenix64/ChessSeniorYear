@@ -50,27 +50,29 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void newPieces() {
-        newPawns();
-        newRooks();
+        // newPawns();
+        // newRooks();
+        pieceList.add(new Rook(NUM_TILES - 1, NUM_TILES - 1, 20));
+
     }
 
     public void newPawns() {
         for (int i = 0; i < NUM_TILES; i++) {
             int rank = 1;
-            pieceList.add(new Pawn(i * PIECE_SIZE, rank * PIECE_SIZE, i + 1));
+            pieceList.add(new Pawn(i, rank, i + 1));
         }
 
         for (int i = 0; i < NUM_TILES; i++) {
             int rank = 6;
-            pieceList.add(new Pawn(i * PIECE_SIZE, rank * PIECE_SIZE, i + 9));
+            pieceList.add(new Pawn(i, rank, i + 9));
         }
     }
 
     public void newRooks() {
         pieceList.add(new Rook(0, 0, 17));
-        pieceList.add(new Rook((NUM_TILES - 1) * PIECE_SIZE, 0, 18));
-        pieceList.add(new Rook(0, (NUM_TILES - 1) * PIECE_SIZE, 19));
-        pieceList.add(new Rook((NUM_TILES - 1) * PIECE_SIZE, (NUM_TILES - 1) * PIECE_SIZE, 20));
+        pieceList.add(new Rook(NUM_TILES - 1, 0, 18));
+        pieceList.add(new Rook(0, NUM_TILES - 1, 19));
+        pieceList.add(new Rook(NUM_TILES - 1, NUM_TILES - 1, 20));
     }
 
     @Override
@@ -86,16 +88,17 @@ public class GamePanel extends JPanel implements Runnable {
         if (background != null) {
             g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
         }
-        for (Piece elem : pieceList) {
-            if (elem.id <= 16) {
-                new Pawn(elem.x, elem.y, elem.id).draw(g);
-            } else if (elem.id <= 20) {
-                new Rook(elem.x, elem.y, elem.id).draw(g);
-            }
-        }
         for (MoveOption elem : movesList) {
             elem.draw(g);
         }
+        for (Piece elem : pieceList) {
+            if (elem.id <= 16) {
+                new Pawn(elem.x, elem.y, elem.id, true).draw(g);
+            } else if (elem.id <= 20) {
+                new Rook(elem.x, elem.y, elem.id, true).draw(g);
+            }
+        }
+
     }
 
     @Override
@@ -133,17 +136,17 @@ public class GamePanel extends JPanel implements Runnable {
                 // move pieces in direction of arrow
 
                 if (key == KeyEvent.VK_UP
-                        && movesList.contains(new MoveOption(selectedPiece.x / 100, ((selectedPiece.y - 100) / 100)))) {
-                    selectedPiece.y -= 100;
+                        && movesList.contains(new MoveOption(selectedPiece.col, selectedPiece.row - 1))) {
+                    selectedPiece.row--;
                 }
                 if (key == KeyEvent.VK_DOWN) {
-                    selectedPiece.y += 100;
+                    selectedPiece.row++;
                 }
                 if (key == KeyEvent.VK_LEFT) {
-                    selectedPiece.x -= 100;
+                    selectedPiece.col--;
                 }
                 if (key == KeyEvent.VK_RIGHT) {
-                    selectedPiece.x += 100;
+                    selectedPiece.col++;
                 }
 
                 // delete the current piece

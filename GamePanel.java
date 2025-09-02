@@ -70,16 +70,16 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void newRooks() {
         pieceList.add(new Rook(0, 0, 17));
-        pieceList.add(new Rook(NUM_TILES - 1, 0, 18));
-        pieceList.add(new Rook(0, NUM_TILES - 1, 19));
-        pieceList.add(new Rook(NUM_TILES - 1, NUM_TILES - 1, 20));
+        pieceList.add(new Rook(7, 0, 18));
+        pieceList.add(new Rook(0, 7, 19));
+        pieceList.add(new Rook(7, 7, 20));
     }
 
     public void newBishops() {
         pieceList.add(new Bishop(2, 0, 21));
-        pieceList.add(new Bishop(NUM_TILES - 3, 0, 22));
+        pieceList.add(new Bishop(5, 0, 22));
         pieceList.add(new Bishop(2, 7, 23));
-        pieceList.add(new Bishop(NUM_TILES - 3, 7, 24));
+        pieceList.add(new Bishop(5, 7, 24));
     }
 
     public void newQueens() {

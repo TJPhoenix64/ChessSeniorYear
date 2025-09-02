@@ -36,12 +36,14 @@ public class Rook extends Piece {
             case 18:
                 if (blackRook != null) {
                     g.drawImage(blackRook, super.x, super.y, width, height, null);
+                    isWhite = false;
                 }
                 break;
             case 19:
             case 20:
                 if (whiteRook != null) {
                     g.drawImage(whiteRook, super.x, super.y, width, height, null);
+                    isWhite = true;
                 }
                 break;
             default:
@@ -61,53 +63,10 @@ public class Rook extends Piece {
         int pieceCol = newPiece.col;
         int pieceRow = newPiece.row;
 
-        boolean hasHitPiece = false;
-        int checkX = pieceCol;
-        int checkY = pieceRow - 1;
-        // up
-        while (!hasHitPiece) {
-            if (!Piece.spaceIsOccupied(checkX, checkY, pieceId) && spaceIsInBounds(checkX, checkY)) {
-                answer.add(new MoveOption(checkX, checkY));
-                checkY--;
-            } else {
-                hasHitPiece = true;
-
-            }
-        }
-        hasHitPiece = false;
-        checkY = newPiece.row + 1;
-        // down
-        while (!hasHitPiece) {
-            if (!Piece.spaceIsOccupied(checkX, checkY, pieceId) && spaceIsInBounds(checkX, checkY)) {
-                answer.add(new MoveOption(checkX, checkY));
-                checkY++;
-            } else {
-                hasHitPiece = true;
-            }
-        }
-        hasHitPiece = false;
-        checkY = newPiece.row;
-        checkX = newPiece.col - 1;
-        // left
-        while (!hasHitPiece) {
-            if (!Piece.spaceIsOccupied(checkX, checkY, pieceId) && spaceIsInBounds(checkX, checkY)) {
-                answer.add(new MoveOption(checkX, checkY));
-                checkX--;
-            } else {
-                hasHitPiece = true;
-            }
-        }
-        hasHitPiece = false;
-        checkX = newPiece.col + 1;
-        // right
-        while (!hasHitPiece) {
-            if (!Piece.spaceIsOccupied(checkX, checkY, pieceId) && spaceIsInBounds(checkX, checkY)) {
-                answer.add(new MoveOption(checkX, checkY));
-                checkX++;
-            } else {
-                hasHitPiece = true;
-            }
-        }
+        addMovesInDirection(answer, pieceCol, pieceRow, -1, 0, pieceId);
+        addMovesInDirection(answer, pieceCol, pieceRow, 1, 0, pieceId);
+        addMovesInDirection(answer, pieceCol, pieceRow, 0, 1, pieceId);
+        addMovesInDirection(answer, pieceCol, pieceRow, 0, -1, pieceId);
 
         return answer;
     }

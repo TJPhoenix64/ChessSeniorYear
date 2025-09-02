@@ -33,8 +33,21 @@ public class Bishop extends Piece {
 
     @Override
     public ArrayList<MoveOption> getMoves() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getMoves'");
+        ArrayList<MoveOption> answer = new ArrayList<>();
+
+        Piece newPiece = getPiece(col, row);
+
+        int pieceId = newPiece.getId();
+        int pieceCol = newPiece.col;
+        int pieceRow = newPiece.row;
+
+        addMovesInDirection(answer, pieceCol, pieceRow, -1, -1, pieceId);
+        addMovesInDirection(answer, pieceCol, pieceRow, -1, 1, pieceId);
+        addMovesInDirection(answer, pieceCol, pieceRow, 1, 1, pieceId);
+        addMovesInDirection(answer, pieceCol, pieceRow, 1, -1, pieceId);
+
+        return answer;
+
     }
 
     @Override
@@ -44,12 +57,14 @@ public class Bishop extends Piece {
             case 22:
                 if (blackBishop != null) {
                     g.drawImage(blackBishop, super.x, super.y, width, height, null);
+                    isWhite = false;
                 }
                 break;
             case 23:
             case 24:
                 if (whiteBishop != null) {
                     g.drawImage(whiteBishop, super.x, super.y, width, height, null);
+                    isWhite = true;
                 }
                 break;
             default:

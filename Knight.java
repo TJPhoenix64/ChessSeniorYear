@@ -30,16 +30,6 @@ public class Knight extends Piece {
         }
     }
 
-    public boolean checkMove(int x, int y) {
-        if (spaceIsInBounds(x, y)) {
-            if (!Piece.spaceIsOccupied(x, y, id)) {
-                return true;
-            } else
-                return Piece.getPiece(x, y).isWhite != this.isWhite;
-        }
-        return false;
-    }
-
     @Override
     public ArrayList<MoveOption> getMoves() {
         ArrayList<MoveOption> answer = new ArrayList<>();

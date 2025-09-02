@@ -129,6 +129,16 @@ public abstract class Piece extends Rectangle {
         return checkPiece;
     }
 
+    public boolean checkMove(int x, int y) {
+        if (spaceIsInBounds(x, y)) {
+            if (!Piece.spaceIsOccupied(x, y, id)) {
+                return true;
+            } else
+                return Piece.getPiece(x, y).isWhite != this.isWhite;
+        }
+        return false;
+    }
+
     public void addMoves() {
         ArrayList<MoveOption> list = getMoves();
         // System.out.println("ADDING MOVES");

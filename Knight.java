@@ -30,10 +30,63 @@ public class Knight extends Piece {
         }
     }
 
+    public boolean checkMove(int x, int y) {
+        if (spaceIsInBounds(x, y)) {
+            if (!Piece.spaceIsOccupied(x, y, id)) {
+                return true;
+            } else
+                return Piece.getPiece(x, y).isWhite != this.isWhite;
+        }
+        return false;
+    }
+
     @Override
     public ArrayList<MoveOption> getMoves() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getMoves'");
+        ArrayList<MoveOption> answer = new ArrayList<>();
+        int checkX = this.col + 1;
+        int checkY = this.row - 2;
+
+        if (checkMove(checkX, checkY)) {
+            answer.add(new MoveOption(checkX, checkY));
+        }
+        checkX -= 2;
+        if (checkMove(checkX, checkY)) {
+            answer.add(new MoveOption(checkX, checkY));
+        }
+
+        checkX -= 1;
+        checkY += 1;
+        if (checkMove(checkX, checkY)) {
+            answer.add(new MoveOption(checkX, checkY));
+        }
+
+        checkY += 2;
+        if (checkMove(checkX, checkY)) {
+            answer.add(new MoveOption(checkX, checkY));
+        }
+
+        checkX += 1;
+        checkY += 1;
+        if (checkMove(checkX, checkY)) {
+            answer.add(new MoveOption(checkX, checkY));
+        }
+
+        checkX += 2;
+        if (checkMove(checkX, checkY)) {
+            answer.add(new MoveOption(checkX, checkY));
+        }
+
+        checkX += 1;
+        checkY -= 1;
+        if (checkMove(checkX, checkY)) {
+            answer.add(new MoveOption(checkX, checkY));
+        }
+
+        checkY -= 2;
+        if (checkMove(checkX, checkY)) {
+            answer.add(new MoveOption(checkX, checkY));
+        }
+        return answer;
     }
 
     @Override

@@ -69,25 +69,36 @@ public class King extends Piece {
             answer.add(new MoveOption(checkX, checkY));
         }
 
+        if (canCastle(col + 4, row)) {
+            answer.add(new MoveOption(col + 3, row));
+        }
+
+        if (canCastle(col - 3, row)) {
+            answer.add(new MoveOption(col - 2, row));
+        }
+
         return answer;
 
     }
 
     public boolean canCastle(int rookX, int rookY) {
-        if (!hadFirstTurn) {
+        if (hadFirstTurn) {
             return false;
         }
         Piece rook = getPiece(rookX, rookY);
-        if (!rook.hadFirstTurn) {
+        if (rook.hadFirstTurn) {
             return false;
         }
         if (rookX > this.col) {
-            if (getPiece(col + 1, row) != null && getPiece(col + 2, row) != null) {
-
+            if (getPiece(col + 1, row) == null && getPiece(col + 2, row) == null && getPiece(col + 3, row) == null) {
+                return true;
+            }
+        } else if (rookX < this.col) {
+            if (getPiece(col - 1, row) == null && getPiece(col - 2, row) == null) {
+                return true;
             }
         }
-
-        return true;
+        return false;
     }
 
     @Override

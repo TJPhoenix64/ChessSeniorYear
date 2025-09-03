@@ -222,7 +222,20 @@ public class GamePanel extends JPanel implements Runnable {
                     Rectangle rect = new Rectangle(p, PIECE_DIMENSION);
                     if (rect.contains(e.getPoint())) {
                         teleportPiece = true;
+                        // handles castling
+                        if (selectedPiece.type == 'K') {
+                            if (moves.col == selectedPiece.col + 3) {
+                                Piece rook = Piece.getPiece(moves.col + 1, moves.row);
+                                rook.teleportPiece(rook, new MoveOption(moves.col - 1, moves.row));
+                                rook.hadFirstTurn = true;
+                            } else if (moves.col == selectedPiece.col - 2) {
+                                Piece rook = Piece.getPiece(moves.col - 1, moves.row);
+                                rook.teleportPiece(rook, new MoveOption(moves.col + 1, moves.row));
+                                rook.hadFirstTurn = true;
+                            }
+                        }
                         selectedPiece.teleportPiece(moves);
+
                         selectedPiece.hadFirstTurn = true;
 
                         // captures the piece it goes to

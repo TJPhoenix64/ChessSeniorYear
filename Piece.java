@@ -116,13 +116,15 @@ public abstract class Piece extends Rectangle {
     }
 
     public static Piece getPiece(int col, int row) {
-        Piece checkPiece = GamePanel.pieceList.get(0);
+        Piece checkPiece = null;
         // System.out.println("getPiece X: " + x + " Y: " + y);
         for (int i = 0; i < GamePanel.pieceList.size(); i++) {
             checkPiece = GamePanel.pieceList.get(i);
 
             if (checkPiece.col == col && checkPiece.row == row) {
                 break;
+            } else {
+                checkPiece = null;
             }
         }
 
@@ -172,10 +174,18 @@ public abstract class Piece extends Rectangle {
 
     public void teleportPiece(MoveOption move) {
         System.out.println("TELEPORTING PIECE");
+
         GamePanel.selectedPiece.x = move.col * GamePanel.PIECE_SIZE;
         GamePanel.selectedPiece.y = move.row * GamePanel.PIECE_SIZE;
         GamePanel.selectedPiece.col = move.col;
         GamePanel.selectedPiece.row = move.row;
+    }
+
+    public void teleportPiece(Piece piece, MoveOption move) {
+        piece.x = move.col * GamePanel.PIECE_SIZE;
+        piece.y = move.row * GamePanel.PIECE_SIZE;
+        piece.col = move.col;
+        piece.row = move.row;
     }
 
     public void mouseReleased(MouseEvent e) {

@@ -172,6 +172,11 @@ public abstract class Piece extends Rectangle {
 
     }
 
+    /**
+     * this should be used for almost every time a piece moves
+     * 
+     * @param move the new location
+     */
     public void teleportPiece(MoveOption move) {
         System.out.println("TELEPORTING PIECE");
 
@@ -179,13 +184,21 @@ public abstract class Piece extends Rectangle {
         GamePanel.selectedPiece.y = move.row * GamePanel.PIECE_SIZE;
         GamePanel.selectedPiece.col = move.col;
         GamePanel.selectedPiece.row = move.row;
+
+        GamePanel.numTurns++;
     }
 
-    public void teleportPiece(Piece piece, MoveOption move) {
-        piece.x = move.col * GamePanel.PIECE_SIZE;
-        piece.y = move.row * GamePanel.PIECE_SIZE;
-        piece.col = move.col;
-        piece.row = move.row;
+    /**
+     * this should only be used for the rook that is being castled
+     * 
+     * @param rook the rook that will move
+     * @param move the place the rook is moving to
+     */
+    public void teleportPiece(Piece rook, MoveOption move) {
+        rook.x = move.col * GamePanel.PIECE_SIZE;
+        rook.y = move.row * GamePanel.PIECE_SIZE;
+        rook.col = move.col;
+        rook.row = move.row;
     }
 
     public void mouseReleased(MouseEvent e) {

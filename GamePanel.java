@@ -21,6 +21,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public static Piece selectedPiece = null;
 
+    public static int numTurns = 1;
+
     static ArrayList<Piece> pieceList = new ArrayList<>();
     static ArrayList<MoveOption> movesList = new ArrayList<>();
 
@@ -216,7 +218,10 @@ public class GamePanel extends JPanel implements Runnable {
 
         @Override
         public void mousePressed(MouseEvent e) {
+            boolean isWhiteTurn = numTurns % 2 == 1;
+
             if (selectedPiece != null) {
+                System.out.println("THIS IS BEING RUN");
                 for (MoveOption moves : movesList) {
                     Point p = new Point(moves.centerX - 30, moves.centerY - 30);
                     Rectangle rect = new Rectangle(p, PIECE_DIMENSION);
@@ -267,9 +272,14 @@ public class GamePanel extends JPanel implements Runnable {
                 for (int i = 0; i < pieceList.size(); i++) {
                     Piece elem = pieceList.get(i);
                     if (elem.contains(e.getPoint())) {
-                        elem.mousePressed(e);
-                        // System.out.println("Mouse Pressed!!!");
-                        break;
+
+                        if (isWhiteTurn == elem.isWhite) {
+                            elem.mousePressed(e);
+                            // System.out.println("Mouse Pressed!!!");
+                            break;
+                        } else {
+                            System.out.println("Not your turn");
+                        }
                     }
                     // if it didnt click a piece
                     if (i + 1 == pieceList.size()) {

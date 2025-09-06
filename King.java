@@ -15,8 +15,8 @@ public class King extends Piece {
         super(displayX, displayY, id, 'K');
 
         try {
-            blackKing = ImageIO.read(new File("Photos/black-knight.png"));
-            whiteKing = ImageIO.read(new File("Photos/white-knight.png"));
+            blackKing = ImageIO.read(new File("Photos/black-king.png"));
+            whiteKing = ImageIO.read(new File("Photos/white-king.png"));
         } catch (IOException e) {
         }
     }
@@ -25,8 +25,8 @@ public class King extends Piece {
         super(displayX, displayY, id, 'K', isMoving);
 
         try {
-            blackKing = ImageIO.read(new File("Photos/black-knight.png"));
-            whiteKing = ImageIO.read(new File("Photos/white-knight.png"));
+            blackKing = ImageIO.read(new File("Photos/black-king.png"));
+            whiteKing = ImageIO.read(new File("Photos/white-king.png"));
         } catch (IOException e) {
         }
     }

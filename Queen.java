@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -15,8 +14,8 @@ public class Queen extends Piece {
         super(col, row, id, 'q');
 
         try {
-            blackQueen = ImageIO.read(new File("Photos/black-rook.png"));
-            whiteQueen = ImageIO.read(new File("Photos/white-rook.png"));
+            blackQueen = ImageIO.read(new File("Photos/black-queen.png"));
+            whiteQueen = ImageIO.read(new File("Photos/white-queen.png"));
         } catch (IOException e) {
         }
     }
@@ -25,8 +24,8 @@ public class Queen extends Piece {
         super(col, row, id, 'q', true);
 
         try {
-            blackQueen = ImageIO.read(new File("Photos/black-rook.png"));
-            whiteQueen = ImageIO.read(new File("Photos/white-rook.png"));
+            blackQueen = ImageIO.read(new File("Photos/black-queen.png"));
+            whiteQueen = ImageIO.read(new File("Photos/white-queen.png"));
         } catch (IOException e) {
         }
     }
@@ -59,6 +58,7 @@ public class Queen extends Piece {
 
     @Override
     public void draw(Graphics g) {
+        // System.out.println("Queen Id: " + id);
         if (blackQueen != null && id == 25) {
             g.drawImage(blackQueen, super.x, super.y, width, height, null);
             isWhite = false;
@@ -66,8 +66,8 @@ public class Queen extends Piece {
             g.drawImage(whiteQueen, super.x, super.y, width, height, null);
             isWhite = true;
         } else {
-            g.setColor(Color.BLACK);
-            g.fillRect(super.x, super.y, width, height);
+            g.drawImage(blackQueen, super.x, super.y, width, height, null);
+            isWhite = false;
         }
     }
 }

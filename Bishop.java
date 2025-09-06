@@ -15,8 +15,8 @@ public class Bishop extends Piece {
         super(col, row, id, 'b');
 
         try {
-            blackBishop = ImageIO.read(new File("Photos/black-rook.png"));
-            whiteBishop = ImageIO.read(new File("Photos/white-rook.png"));
+            blackBishop = ImageIO.read(new File("Photos/black-bishop.png"));
+            whiteBishop = ImageIO.read(new File("Photos/white-bishop.png"));
         } catch (IOException e) {
         }
     }
@@ -25,8 +25,8 @@ public class Bishop extends Piece {
         super(col, row, id, 'b', true);
 
         try {
-            blackBishop = ImageIO.read(new File("Photos/black-rook.png"));
-            whiteBishop = ImageIO.read(new File("Photos/white-rook.png"));
+            blackBishop = ImageIO.read(new File("Photos/black-bishop.png"));
+            whiteBishop = ImageIO.read(new File("Photos/white-bishop.png"));
         } catch (IOException e) {
         }
     }

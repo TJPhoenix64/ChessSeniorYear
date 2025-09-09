@@ -162,13 +162,16 @@ public class GamePanel extends JPanel implements Runnable {
                         && movesList.contains(new MoveOption(selectedPiece.col, selectedPiece.row - 1))) {
                     selectedPiece.row--;
                 }
-                if (key == KeyEvent.VK_DOWN) {
+                if (key == KeyEvent.VK_DOWN
+                        && movesList.contains(new MoveOption(selectedPiece.col, selectedPiece.row + 1))) {
                     selectedPiece.row++;
                 }
-                if (key == KeyEvent.VK_LEFT) {
+                if (key == KeyEvent.VK_LEFT
+                        && movesList.contains(new MoveOption(selectedPiece.col - 1, selectedPiece.row))) {
                     selectedPiece.col--;
                 }
-                if (key == KeyEvent.VK_RIGHT) {
+                if (key == KeyEvent.VK_RIGHT
+                        && movesList.contains(new MoveOption(selectedPiece.col + 1, selectedPiece.row))) {
                     selectedPiece.col++;
                 }
 
@@ -239,18 +242,20 @@ public class GamePanel extends JPanel implements Runnable {
                                 rook.hadFirstTurn = true;
                             }
                         }
-                        selectedPiece.teleportPiece(moves);
-
-                        selectedPiece.hadFirstTurn = true;
-
                         // captures the piece it goes to
                         for (int i = 0; i < pieceList.size(); i++) {
                             Piece elem = pieceList.get(i);
-                            if (elem.contains(e.getPoint()) && elem != selectedPiece) {
+                            System.out.println("elem: " + elem + " " + i);
+                            if (elem.contains(e.getPoint()) && selectedPiece != elem) {
                                 pieceList.remove(elem);
                                 break;
                             }
                         }
+                        selectedPiece.teleportPiece(moves);
+                        System.out.println("Selected Piece: " + selectedPiece);
+
+                        selectedPiece.hadFirstTurn = true;
+
                         // deselects piece and clears moves
                         selectedPiece = null;
                         movesList.clear();

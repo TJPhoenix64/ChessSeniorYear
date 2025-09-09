@@ -247,10 +247,12 @@ public class GamePanel extends JPanel implements Runnable {
                                 Piece rook = Piece.getPiece(moves.col + 1, moves.row);
                                 rook.teleportPiece(rook, new MoveOption(moves.col - 1, moves.row));
                                 rook.hadFirstTurn = true;
+                                rook.numPreviousMoves++;
                             } else if (moves.col == selectedPiece.col - 2) {
                                 Piece rook = Piece.getPiece(moves.col - 1, moves.row);
                                 rook.teleportPiece(rook, new MoveOption(moves.col + 1, moves.row));
                                 rook.hadFirstTurn = true;
+                                rook.numPreviousMoves++;
                             }
                         }
                         // captures the piece it goes to
@@ -266,6 +268,7 @@ public class GamePanel extends JPanel implements Runnable {
                         System.out.println("Selected Piece: " + selectedPiece);
 
                         selectedPiece.hadFirstTurn = true;
+                        selectedPiece.numPreviousMoves++;
 
                         // deselects piece and clears moves
                         selectedPiece = null;

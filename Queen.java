@@ -75,10 +75,10 @@ public class Queen extends Piece {
             g.drawImage(whiteQueen, super.x, super.y, width, height, null);
             isWhite = true;
         } else if (id > 50 && this.isWhite) {
-            g.drawImage(whiteQueen, super.x, super.y, GamePanel.PIECE_SIZE, GamePanel.PIECE_SIZE, null);
+            g.drawImage(whiteQueen, super.x, super.y, width, height, null);
             isWhite = true;
         } else if (id > 50 && !this.isWhite) {
-            g.drawImage(blackQueen, super.x, super.y, GamePanel.PIECE_SIZE, GamePanel.PIECE_SIZE, null);
+            g.drawImage(blackQueen, super.x, super.y, width, height, null);
             isWhite = false;
         } else {
             g.drawImage(blackQueen, super.x, super.y, width, height, null);

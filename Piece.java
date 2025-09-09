@@ -51,6 +51,7 @@ public abstract class Piece extends Rectangle {
      * @param isWhite
      */
     public Piece(int col, int row, int id, char type, boolean isMoving, boolean isWhite) {
+        super(col * GamePanel.PIECE_SIZE, row * GamePanel.PIECE_SIZE, GamePanel.PIECE_SIZE, GamePanel.PIECE_SIZE);
         this.x = col * GamePanel.PIECE_SIZE;
         this.y = row * GamePanel.PIECE_SIZE;
         this.id = id;

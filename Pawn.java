@@ -117,6 +117,7 @@ public class Pawn extends Piece {
             System.out.println(queen);
             GamePanel.pieceList.remove(piece);
             GamePanel.pieceList.add(queen);
+            GamePanel.selectedPiece = queen;
         }
     }
 

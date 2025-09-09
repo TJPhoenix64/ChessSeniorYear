@@ -17,6 +17,7 @@ public abstract class Piece extends Rectangle {
     char type;
     boolean isWhite;
     boolean hadFirstTurn = false;
+    boolean isPinned = false;
 
     public Piece(int col, int row, int id, char type) {
         super(col * GamePanel.PIECE_SIZE, row * GamePanel.PIECE_SIZE, GamePanel.PIECE_SIZE, GamePanel.PIECE_SIZE);
@@ -37,6 +38,26 @@ public abstract class Piece extends Rectangle {
         this.row = displayY / 100;
         this.type = type;
 
+    }
+
+    /**
+     * this constructor should only be used for pawns promoting to queens
+     * 
+     * @param col
+     * @param row
+     * @param id
+     * @param type
+     * @param isMoving
+     * @param isWhite
+     */
+    public Piece(int col, int row, int id, char type, boolean isMoving, boolean isWhite) {
+        this.x = col * GamePanel.PIECE_SIZE;
+        this.y = row * GamePanel.PIECE_SIZE;
+        this.id = id;
+        this.col = col;
+        this.row = row;
+        this.type = type;
+        this.isWhite = isWhite;
     }
 
     public int getId() {
@@ -108,7 +129,7 @@ public abstract class Piece extends Rectangle {
                     pieceIsSelected = true;
                     pieceIsPressed = true;
                     GamePanel.movesList.clear();
-                    System.out.println(GamePanel.selectedPiece);
+                    System.out.println("Selected Piece + " + GamePanel.selectedPiece);
                     GamePanel.selectedPiece.addMoves();
                 }
             }
@@ -116,19 +137,23 @@ public abstract class Piece extends Rectangle {
     }
 
     public static Piece getPiece(int col, int row) {
-        Piece checkPiece = null;
-        // System.out.println("getPiece X: " + x + " Y: " + y);
-        for (int i = 0; i < GamePanel.pieceList.size(); i++) {
-            checkPiece = GamePanel.pieceList.get(i);
-
-            if (checkPiece.col == col && checkPiece.row == row) {
-                break;
-            } else {
-                checkPiece = null;
+        Piece piece = null;
+        for (Piece elem : GamePanel.pieceList) {
+            if (elem.col == col && elem.row == row) {
+                piece = elem;
             }
         }
+        return piece;
+    }
 
-        return checkPiece;
+    public static Piece getPiece(int id) {
+        Piece piece = null;
+        for (Piece elem : GamePanel.pieceList) {
+            if (elem.id == id) {
+                piece = elem;
+            }
+        }
+        return piece;
     }
 
     public boolean checkMove(int x, int y) {
@@ -186,6 +211,18 @@ public abstract class Piece extends Rectangle {
         GamePanel.selectedPiece.row = move.row;
 
         GamePanel.numTurns++;
+
+        if (GamePanel.selectedPiece.type == 'p') {
+
+            if ((move.row == 0 && GamePanel.selectedPiece.isWhite)
+                    || (move.row == 7 && !GamePanel.selectedPiece.isWhite)) {
+                Pawn pawn = new Pawn(GamePanel.selectedPiece.col, GamePanel.selectedPiece.row,
+                        GamePanel.selectedPiece.id);
+                pawn.promote();
+
+            }
+
+        }
     }
 
     /**
@@ -365,14 +402,24 @@ public abstract class Piece extends Rectangle {
 
     @Override
     public String toString() {
-        String answer = "";
-        if (type == 'p') {
-            answer += "Pawn, ";
-        } else if (type == 'r') {
-            answer += "Rook, ";
+        StringBuilder answer = new StringBuilder();
+        switch (type) {
+            case 'p' -> answer.append("Pawn, ");
+            case 'r' -> answer.append("Rook, ");
+            case 'k' -> answer.append("Knight, ");
+            case 'K' -> answer.append("King, ");
+            case 'q' -> answer.append("Queen, ");
+            case 'b' -> answer.append("Bishop, ");
+            default -> {
+            }
         }
-        answer += "X: " + x + " Y: " + y + " ID: " + id;
-        return answer;
+        answer.append("X: ").append(x).append(" Y: ").append(y).append(" ID: ").append(id);
+        if (isWhite) {
+            answer.append(" White");
+        } else {
+            answer.append(" Black");
+        }
+        return answer.toString();
 
     }
 }

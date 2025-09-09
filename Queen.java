@@ -21,7 +21,17 @@ public class Queen extends Piece {
     }
 
     public Queen(int col, int row, int id, boolean isMoving) {
-        super(col, row, id, 'q', true);
+        super(col * 100, row * 100, id, 'q', true);
+
+        try {
+            blackQueen = ImageIO.read(new File("Photos/black-queen.png"));
+            whiteQueen = ImageIO.read(new File("Photos/white-queen.png"));
+        } catch (IOException e) {
+        }
+    }
+
+    public Queen(int col, int row, int id, boolean isMoving, boolean isWhite) {
+        super(col, row, id, 'q', true, isWhite);
 
         try {
             blackQueen = ImageIO.read(new File("Photos/black-queen.png"));
@@ -58,13 +68,18 @@ public class Queen extends Piece {
 
     @Override
     public void draw(Graphics g) {
-        // System.out.println("Queen Id: " + id);
         if (blackQueen != null && id == 25) {
             g.drawImage(blackQueen, super.x, super.y, width, height, null);
             isWhite = false;
         } else if (whiteQueen != null && id == 26) {
             g.drawImage(whiteQueen, super.x, super.y, width, height, null);
             isWhite = true;
+        } else if (id > 50 && this.isWhite) {
+            g.drawImage(whiteQueen, super.x, super.y, GamePanel.PIECE_SIZE, GamePanel.PIECE_SIZE, null);
+            isWhite = true;
+        } else if (id > 50 && !this.isWhite) {
+            g.drawImage(blackQueen, super.x, super.y, GamePanel.PIECE_SIZE, GamePanel.PIECE_SIZE, null);
+            isWhite = false;
         } else {
             g.drawImage(blackQueen, super.x, super.y, width, height, null);
             isWhite = false;

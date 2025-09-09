@@ -204,6 +204,16 @@ public class GamePanel extends JPanel implements Runnable {
                 // cycle through the pieces on the board and select them
             }
 
+            // prints the rectangles of any promoted pawns
+            if (key == KeyEvent.VK_3) {
+                for (int i = 50; i < 100; i++) {
+                    if (Piece.getPiece(i) != null) {
+                        System.out.println("Has piece " + i);
+                        System.out.println(Piece.getPiece(i).getBounds());
+                    }
+                }
+            }
+
         }
 
         @Override
@@ -222,6 +232,7 @@ public class GamePanel extends JPanel implements Runnable {
         @Override
         public void mousePressed(MouseEvent e) {
             boolean isWhiteTurn = numTurns % 2 == 1;
+            System.out.println("SelectedPiece: " + selectedPiece);
 
             if (selectedPiece != null) {
                 System.out.println("THIS IS BEING RUN");
@@ -274,9 +285,11 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             } else {
                 // if no preselected piece
+                boolean clickedPiece = false;
                 for (int i = 0; i < pieceList.size(); i++) {
                     Piece elem = pieceList.get(i);
                     if (elem.contains(e.getPoint())) {
+                        clickedPiece = true;
 
                         if (isWhiteTurn == elem.isWhite) {
                             elem.mousePressed(e);
@@ -284,15 +297,17 @@ public class GamePanel extends JPanel implements Runnable {
                             break;
                         } else {
                             System.out.println("Not your turn");
+                            break;
                         }
                     }
-                    // if it didnt click a piece
-                    if (i + 1 == pieceList.size()) {
-                        movesList.clear();
-                        selectedPiece = null;
-                        System.out.println("Clicked on air2");
-                    }
                 }
+                // if it didnt click a piece
+                if (!clickedPiece) {
+                    movesList.clear();
+                    selectedPiece = null;
+                    System.out.println("Clicked on air2");
+                }
+
             }
         }
 

@@ -108,4 +108,16 @@ public class Pawn extends Piece {
         return answer;
     }
 
+    public void promote() {
+        Piece piece = Piece.getPiece(this.col, this.row);
+
+        System.out.println("Promoting piece: " + piece);
+        if (piece.type == 'p') {
+            Queen queen = new Queen(piece.col, piece.row, piece.id + 50, true, piece.isWhite);
+            System.out.println(queen);
+            GamePanel.pieceList.remove(piece);
+            GamePanel.pieceList.add(queen);
+        }
+    }
+
 }

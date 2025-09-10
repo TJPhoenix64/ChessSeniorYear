@@ -28,7 +28,7 @@ public abstract class Piece extends Rectangle {
         this.col = col;
         this.row = row;
         this.type = type;
-        numMoves = 0;
+        numPreviousMoves = 0;
     }
 
     public Piece(int displayX, int displayY, int id, char type, boolean isMoving) {
@@ -39,7 +39,7 @@ public abstract class Piece extends Rectangle {
         this.col = displayX / 100;
         this.row = displayY / 100;
         this.type = type;
-        numMoves = 0;
+        numPreviousMoves = 0;
 
     }
 
@@ -62,7 +62,7 @@ public abstract class Piece extends Rectangle {
         this.row = row;
         this.type = type;
         this.isWhite = isWhite;
-        numMoves = 0;
+        numPreviousMoves = 0;
     }
 
     public int getId() {

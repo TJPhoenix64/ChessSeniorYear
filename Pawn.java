@@ -121,9 +121,11 @@ public class Pawn extends Piece {
 
         // en passant
         if (row == 3 && this.isWhite) {
-            Piece piece = Piece.getPiece(col - 1, row);
-            if (piece.type == 'p' && !piece.isWhite && piece.numPreviousMoves == 1) {
-                answer.add(new MoveOption(moveX - 1, moveY1));
+            if (Piece.getPiece(col - 1, row) != null) {
+                Piece piece = Piece.getPiece(col - 1, row);
+                if (piece.type == 'p' && !piece.isWhite && piece.numPreviousMoves == 1) {
+                    answer.add(new MoveOption(moveX - 1, moveY1));
+                }
             }
         }
 

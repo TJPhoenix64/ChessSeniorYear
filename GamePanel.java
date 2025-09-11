@@ -238,6 +238,12 @@ public class GamePanel extends JPanel implements Runnable {
                 showPsuedoMoves = !showPsuedoMoves;
             }
 
+            if (key == KeyEvent.VK_4) {
+                for (Piece elem : pieceList) {
+                    System.out.println(elem.getMoves());
+                }
+            }
+
         }
 
         @Override

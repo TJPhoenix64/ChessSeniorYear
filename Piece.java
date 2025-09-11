@@ -85,7 +85,7 @@ public abstract class Piece extends Rectangle {
 
         if (GamePanel.canClick) {
 
-            GamePanel.movesList.clear();
+            GamePanel.selectedPieceMovesList.clear();
             GamePanel.mouseReleased = false;
 
             startMouseX = e.getX();
@@ -107,7 +107,7 @@ public abstract class Piece extends Rectangle {
             } else if (GamePanel.selectedPiece == this) {
                 System.out.println("clicked piece again");
                 // System.out.println("CurrentX: " + x + " CurrentY: " + y);
-                GamePanel.movesList.clear();
+                GamePanel.selectedPieceMovesList.clear();
                 GamePanel.selectedPiece = this;
                 pieceIsSelected = true;
                 pieceIsPressed = true;
@@ -121,7 +121,7 @@ public abstract class Piece extends Rectangle {
 
                 MoveOption move = new MoveOption(this.col, this.row);
 
-                if (GamePanel.movesList.contains(move)) {
+                if (GamePanel.selectedPieceMovesList.contains(move)) {
                     GamePanel.pieceList.remove(this);
                     System.out.println("Piece being removed: " + this);
                     GamePanel.selectedPiece.teleportPiece(move);
@@ -133,7 +133,7 @@ public abstract class Piece extends Rectangle {
 
                     pieceIsSelected = true;
                     pieceIsPressed = true;
-                    GamePanel.movesList.clear();
+                    GamePanel.selectedPieceMovesList.clear();
                     System.out.println("Selected Piece + " + GamePanel.selectedPiece);
                     GamePanel.selectedPiece.addMoves();
                 }
@@ -176,7 +176,7 @@ public abstract class Piece extends Rectangle {
         ArrayList<MoveOption> list = getMoves();
         // System.out.println("ADDING MOVES");
         for (MoveOption elem : list) {
-            GamePanel.movesList.add(elem);
+            GamePanel.selectedPieceMovesList.add(elem);
             System.out.println(elem);
         }
     }
@@ -264,7 +264,7 @@ public abstract class Piece extends Rectangle {
 
             // System.out.println("Available moves: " + GamePanel.movesList);
 
-            if (GamePanel.selectedPiece != null && !GamePanel.movesList.isEmpty()) {
+            if (GamePanel.selectedPiece != null && !GamePanel.selectedPieceMovesList.isEmpty()) {
 
                 System.out.println("there is a selected piece, and it has valid moves");
                 // System.out.println("CurrentX: " + x + " CurrentY: " + y);
@@ -288,11 +288,11 @@ public abstract class Piece extends Rectangle {
                  */
 
                 // if the move attempt is valid, move the piece
-                if (GamePanel.movesList.contains(attempt)) {
+                if (GamePanel.selectedPieceMovesList.contains(attempt)) {
                     System.out.println("TTHIS CODE RUNS");
                     teleportPiece(attempt);
                     // Clear selection and moves
-                    GamePanel.movesList.clear();
+                    GamePanel.selectedPieceMovesList.clear();
                     GamePanel.selectedPiece = null;
                     GamePanel.canClick = true;
                 } else {
@@ -300,7 +300,7 @@ public abstract class Piece extends Rectangle {
                     GamePanel.selectedPiece.y = startPieceY;
                     System.out.println("invalid move location");
                 }
-            } else if (GamePanel.movesList.isEmpty()) {
+            } else if (GamePanel.selectedPieceMovesList.isEmpty()) {
                 System.out.println("No valid moves");
             } else if (GamePanel.selectedPiece == null) {
                 System.out.println("No selected piece");
@@ -320,7 +320,7 @@ public abstract class Piece extends Rectangle {
             pieceIsSelected = false;
 
             if (pieceIsDragged) {
-                if (GamePanel.movesList.contains(new MoveOption(x / 100, y))) {
+                if (GamePanel.selectedPieceMovesList.contains(new MoveOption(x / 100, y))) {
 
                 }
                 pieceIsDragged = false;

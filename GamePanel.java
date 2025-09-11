@@ -24,7 +24,9 @@ public class GamePanel extends JPanel implements Runnable {
     public static int numTurns = 1;
 
     static ArrayList<Piece> pieceList = new ArrayList<>();
-    static ArrayList<MoveOption> movesList = new ArrayList<>();
+    static ArrayList<MoveOption> selectedPieceMovesList = new ArrayList<>();
+    static ArrayList<MoveOption> psuedoLegalMovesList = new ArrayList<>();
+    static ArrayList<MoveOption> legalMovesList = new ArrayList<>();
 
     Thread gameThread;
     Image image;
@@ -120,7 +122,7 @@ public class GamePanel extends JPanel implements Runnable {
         for (Piece elem : pieceList) {
             elem.draw(g);
         }
-        for (MoveOption elem : movesList) {
+        for (MoveOption elem : selectedPieceMovesList) {
             elem.draw(g);
         }
 
@@ -159,19 +161,19 @@ public class GamePanel extends JPanel implements Runnable {
                 // move pieces in direction of arrow
 
                 if (key == KeyEvent.VK_UP
-                        && movesList.contains(new MoveOption(selectedPiece.col, selectedPiece.row - 1))) {
+                        && selectedPieceMovesList.contains(new MoveOption(selectedPiece.col, selectedPiece.row - 1))) {
                     selectedPiece.row--;
                 }
                 if (key == KeyEvent.VK_DOWN
-                        && movesList.contains(new MoveOption(selectedPiece.col, selectedPiece.row + 1))) {
+                        && selectedPieceMovesList.contains(new MoveOption(selectedPiece.col, selectedPiece.row + 1))) {
                     selectedPiece.row++;
                 }
                 if (key == KeyEvent.VK_LEFT
-                        && movesList.contains(new MoveOption(selectedPiece.col - 1, selectedPiece.row))) {
+                        && selectedPieceMovesList.contains(new MoveOption(selectedPiece.col - 1, selectedPiece.row))) {
                     selectedPiece.col--;
                 }
                 if (key == KeyEvent.VK_RIGHT
-                        && movesList.contains(new MoveOption(selectedPiece.col + 1, selectedPiece.row))) {
+                        && selectedPieceMovesList.contains(new MoveOption(selectedPiece.col + 1, selectedPiece.row))) {
                     selectedPiece.col++;
                 }
 
@@ -182,8 +184,8 @@ public class GamePanel extends JPanel implements Runnable {
                 }
 
                 if (key == KeyEvent.VK_0) {
-                    System.out.println("\nNumMoves: " + movesList.size());
-                    System.out.println("Moves: " + movesList);
+                    System.out.println("\nNumMoves: " + selectedPieceMovesList.size());
+                    System.out.println("Moves: " + selectedPieceMovesList);
                 }
             }
 
@@ -236,7 +238,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             if (selectedPiece != null) {
                 System.out.println("THIS IS BEING RUN");
-                for (MoveOption moves : movesList) {
+                for (MoveOption moves : selectedPieceMovesList) {
                     Point p = new Point(moves.centerX - 30, moves.centerY - 30);
                     Rectangle rect = new Rectangle(p, PIECE_DIMENSION);
                     if (rect.contains(e.getPoint())) {
@@ -285,7 +287,7 @@ public class GamePanel extends JPanel implements Runnable {
 
                         // deselects piece and clears moves
                         selectedPiece = null;
-                        movesList.clear();
+                        selectedPieceMovesList.clear();
                         break;
                     }
                 }
@@ -293,7 +295,7 @@ public class GamePanel extends JPanel implements Runnable {
                     // System.out.println("TELEPORT");
                     teleportPiece = false;
                 } else if (!selectedPiece.contains(e.getPoint())) {
-                    movesList.clear();
+                    selectedPieceMovesList.clear();
                     selectedPiece = null;
                     System.out.println("Clicked on air1");
                 } else {
@@ -319,7 +321,7 @@ public class GamePanel extends JPanel implements Runnable {
                 }
                 // if it didnt click a piece
                 if (!clickedPiece) {
-                    movesList.clear();
+                    selectedPieceMovesList.clear();
                     selectedPiece = null;
                     System.out.println("Clicked on air2");
                 }

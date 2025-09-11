@@ -374,7 +374,7 @@ public abstract class Piece extends Rectangle {
                 // + " " + row);
                 if (elem.col == col && elem.row == row) {
                     answer = true;
-                    System.out.println("Piece was stopped by: " + elem.id);
+                    // System.out.println("Piece was stopped by: " + elem.id);
                     break;
                 }
             }
@@ -383,7 +383,7 @@ public abstract class Piece extends Rectangle {
     }
 
     public static boolean spaceIsInBounds(int col, int row) {
-        System.out.println("Checking: " + col + " " + row);
+        // System.out.println("Checking: " + col + " " + row);
         return (col >= 0 && col < GamePanel.NUM_TILES && row >= 0 && row < GamePanel.NUM_TILES);
     }
 

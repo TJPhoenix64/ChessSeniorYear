@@ -129,7 +129,7 @@ public class Pawn extends Piece {
             }
         }
 
-        System.out.println(answer);
+        // System.out.println(answer);
         return answer;
     }
 

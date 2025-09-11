@@ -104,7 +104,7 @@ public class King extends Piece {
                 return true;
             }
         }
-        System.out.println("Returning false");
+        // System.out.println("Returning false");
         return false;
     }
 

@@ -87,8 +87,8 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void newQueens() {
-        pieceList.add(new Queen(4, 0, 25));
-        pieceList.add(new Queen(4, 7, 26));
+        pieceList.add(new Queen(3, 0, 25));
+        pieceList.add(new Queen(3, 7, 26));
     }
 
     public void newKnights() {
@@ -99,8 +99,8 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void newKings() {
-        pieceList.add(new King(3, 0, 31));
-        pieceList.add(new King(3, 7, 32));
+        pieceList.add(new King(4, 0, 31));
+        pieceList.add(new King(4, 7, 32));
     }
 
     @Override

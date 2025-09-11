@@ -69,11 +69,10 @@ public class King extends Piece {
             answer.add(new MoveOption(checkX, checkY));
         }
 
-        if (canCastle(col + 4, row)) {
-            answer.add(new MoveOption(col + 3, row));
+        if (canCastle(col + 3, row)) {
+            answer.add(new MoveOption(col + 2, row));
         }
-
-        if (canCastle(col - 3, row)) {
+        if (canCastle(col - 4, row)) {
             answer.add(new MoveOption(col - 2, row));
         }
 
@@ -81,6 +80,13 @@ public class King extends Piece {
 
     }
 
+    /**
+     * checks if you can castle
+     * 
+     * @param rookX the x position of the rook
+     * @param rookY the y position of the rook
+     * @return returns if you can castle
+     */
     public boolean canCastle(int rookX, int rookY) {
         if (hadFirstTurn) {
             return false;
@@ -90,14 +96,15 @@ public class King extends Piece {
             return false;
         }
         if (rookX > this.col) {
-            if (getPiece(col + 1, row) == null && getPiece(col + 2, row) == null && getPiece(col + 3, row) == null) {
+            if (getPiece(col + 1, row) == null && getPiece(col + 2, row) == null) {
                 return true;
             }
         } else if (rookX < this.col) {
-            if (getPiece(col - 1, row) == null && getPiece(col - 2, row) == null) {
+            if (getPiece(col - 1, row) == null && getPiece(col - 2, row) == null && getPiece(col - 3, row) == null) {
                 return true;
             }
         }
+        System.out.println("Returning false");
         return false;
     }
 

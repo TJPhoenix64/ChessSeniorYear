@@ -165,8 +165,9 @@ public abstract class Piece extends Rectangle {
         if (spaceIsInBounds(x, y)) {
             if (!Piece.spaceIsOccupied(x, y, id)) {
                 return true;
-            } else
+            } else {
                 return Piece.getPiece(x, y).isWhite != this.isWhite;
+            }
         }
         return false;
     }

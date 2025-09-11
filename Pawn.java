@@ -74,6 +74,7 @@ public class Pawn extends Piece {
         int moveY2 = row - (2 * multiplier);
 
         // moving forward
+
         if (moveX >= 0 && moveX <= GamePanel.NUM_TILES - 1) {
             if (moveY1 >= 0 && moveY1 <= GamePanel.NUM_TILES - 1) {
                 if (!Piece.spaceIsOccupied(moveX, moveY1, pieceId)) {
@@ -87,21 +88,43 @@ public class Pawn extends Piece {
                 }
             }
         }
+        /*
+         * // capturing diagonally
+         * if (checkMove(moveX, moveY1)) {
+         * answer.add(new MoveOption(moveX - 1, moveY1));
+         * }
+         * 
+         * if (checkMove(moveX, moveY1)) {
+         * answer.add(new MoveOption(moveX + 1, moveY1));
+         * }
+         */
 
         // capturing diagonally
         if (moveY1 >= 0 && moveY1 <= GamePanel.NUM_TILES - 1) {
             if (moveX - 1 >= 0 && moveX - 1 <= GamePanel.NUM_TILES - 1) {
                 if (Piece.spaceIsOccupied(moveX - 1, moveY1, newPiece.getId())) {
-                    answer.add(new MoveOption(moveX - 1, moveY1));
+                    if (Piece.getPiece(moveX - 1, moveY1).isWhite != this.isWhite) {
+                        answer.add(new MoveOption(moveX - 1, moveY1));
+                    }
                 }
             }
 
             if (moveX + 1 >= 0 && moveX + 1 <= GamePanel.NUM_TILES - 1) {
                 if (Piece.spaceIsOccupied(moveX + 1, moveY1, newPiece.getId())) {
-                    answer.add(new MoveOption(moveX + 1, moveY1));
+                    if (Piece.getPiece(moveX + 1, moveY1).isWhite != this.isWhite) {
+                        answer.add(new MoveOption(moveX + 1, moveY1));
+                    }
                 }
             }
 
+        }
+
+        // en passant
+        if (row == 3 && this.isWhite) {
+            Piece piece = Piece.getPiece(col - 1, row);
+            if (piece.type == 'p' && !piece.isWhite && piece.numPreviousMoves == 1) {
+                answer.add(new MoveOption(moveX - 1, moveY1));
+            }
         }
 
         System.out.println(answer);

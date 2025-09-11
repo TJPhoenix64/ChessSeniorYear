@@ -243,22 +243,32 @@ public class GamePanel extends JPanel implements Runnable {
                         teleportPiece = true;
                         // handles castling
                         if (selectedPiece.type == 'K') {
-                            if (moves.col == selectedPiece.col + 3) {
+                            if (moves.col == selectedPiece.col + 2) {
                                 Piece rook = Piece.getPiece(moves.col + 1, moves.row);
                                 rook.teleportPiece(rook, new MoveOption(moves.col - 1, moves.row));
                                 rook.hadFirstTurn = true;
                                 rook.numPreviousMoves++;
                             } else if (moves.col == selectedPiece.col - 2) {
-                                Piece rook = Piece.getPiece(moves.col - 1, moves.row);
+                                Piece rook = Piece.getPiece(moves.col - 2, moves.row);
                                 rook.teleportPiece(rook, new MoveOption(moves.col + 1, moves.row));
                                 rook.hadFirstTurn = true;
                                 rook.numPreviousMoves++;
                             }
                         }
+                        // white en passant
+                        if (selectedPiece.type == 'p' && selectedPiece.row == 3 && selectedPiece.isWhite) {
+                            Piece piece = Piece.getPiece(selectedPiece.col - 1, selectedPiece.row);
+                            if (piece.type == 'p' && !piece.isWhite && piece.numPreviousMoves == 1) {
+                                selectedPiece.teleportPiece(
+                                        new MoveOption(selectedPiece.col - 1, selectedPiece.row - 1));
+                                pieceList.remove(piece);
+                            }
+                        }
+
                         // captures the piece it goes to
                         for (int i = 0; i < pieceList.size(); i++) {
                             Piece elem = pieceList.get(i);
-                            System.out.println("elem: " + elem + " " + i);
+                            // System.out.println("elem: " + elem + " " + i);
                             if (elem.contains(e.getPoint()) && selectedPiece != elem) {
                                 pieceList.remove(elem);
                                 break;

@@ -236,11 +236,17 @@ public class GamePanel extends JPanel implements Runnable {
             // toggles if you want to see psuedo moves
             if (key == KeyEvent.VK_2) {
                 showPsuedoMoves = !showPsuedoMoves;
+                System.out.println(psuedoLegalMovesList.contains(new MoveOption(4, 6)));
             }
 
             if (key == KeyEvent.VK_4) {
                 for (Piece elem : pieceList) {
                     System.out.println(elem + " " + elem.getMoves() + " " + elem.getMoves().size());
+                    for (MoveOption move : elem.getMoves()) {
+                        if (move == new MoveOption(4, 6)) {
+                            System.out.println("Can go to 4, 6: " + elem);
+                        }
+                    }
                 }
             }
 

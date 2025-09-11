@@ -127,6 +127,29 @@ public class Pawn extends Piece {
                     answer.add(new MoveOption(moveX - 1, moveY1));
                 }
             }
+
+            if (Piece.getPiece(col + 1, row) != null) {
+                Piece piece = Piece.getPiece(col + 1, row);
+                if (piece.type == 'p' && !piece.isWhite && piece.numPreviousMoves == 1) {
+                    answer.add(new MoveOption(moveX + 1, moveY1));
+                }
+            }
+        }
+
+        if (row == 4 && !this.isWhite) {
+            if (Piece.getPiece(col - 1, row) != null) {
+                Piece piece = Piece.getPiece(col - 1, row);
+                if (piece.type == 'p' && piece.isWhite && piece.numPreviousMoves == 1) {
+                    answer.add(new MoveOption(moveX - 1, piece.row + 1));
+                }
+            }
+
+            if (Piece.getPiece(col - 1, row) != null) {
+                Piece piece = Piece.getPiece(col - 1, row);
+                if (piece.type == 'p' && piece.isWhite && piece.numPreviousMoves == 1) {
+                    answer.add(new MoveOption(moveX - 1, piece.row + 1));
+                }
+            }
         }
 
         // System.out.println(answer);

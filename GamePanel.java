@@ -298,6 +298,33 @@ public class GamePanel extends JPanel implements Runnable {
                                     pieceList.remove(piece);
                                 }
                             }
+                            if (Piece.getPiece(selectedPiece.col + 1, selectedPiece.row) != null) {
+                                Piece piece = Piece.getPiece(selectedPiece.col + 1, selectedPiece.row);
+                                if (piece.type == 'p' && !piece.isWhite && piece.numPreviousMoves == 1) {
+                                    selectedPiece.teleportPiece(
+                                            new MoveOption(selectedPiece.col + 1, selectedPiece.row - 1));
+                                    pieceList.remove(piece);
+                                }
+                            }
+                        }
+
+                        if (selectedPiece.type == 'p' && selectedPiece.row == 4 && !selectedPiece.isWhite) {
+                            if (Piece.getPiece(selectedPiece.col + 1, selectedPiece.row) != null) {
+                                Piece piece = Piece.getPiece(selectedPiece.col + 1, selectedPiece.row);
+                                if (piece.type == 'p' && piece.isWhite && piece.numPreviousMoves == 1) {
+                                    selectedPiece.teleportPiece(
+                                            new MoveOption(selectedPiece.col + 1, selectedPiece.row + 1));
+                                    pieceList.remove(piece);
+                                }
+                            }
+                            if (Piece.getPiece(selectedPiece.col - 1, selectedPiece.row) != null) {
+                                Piece piece = Piece.getPiece(selectedPiece.col - 1, selectedPiece.row);
+                                if (piece.type == 'p' && piece.isWhite && piece.numPreviousMoves == 1) {
+                                    selectedPiece.teleportPiece(
+                                            new MoveOption(selectedPiece.col - 1, selectedPiece.row + 1));
+                                    pieceList.remove(piece);
+                                }
+                            }
                         }
 
                         // captures the piece it goes to

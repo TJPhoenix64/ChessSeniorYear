@@ -322,17 +322,27 @@ public class GamePanel extends JPanel implements Runnable {
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            for (Piece elem : pieceList) {
-                if (elem.contains(e.getPoint())) {
-                    elem.mouseReleased(e);
-                    break;
+            if (selectedPiece != null) {
+                for (Piece elem : pieceList) {
+                    if (elem.contains(e.getPoint()) && selectedPiece != elem) {
+                        pieceList.remove(elem);
+                        break;
+                    }
+                }
+                selectedPiece.mouseReleased(e);
+
+            } else {
+                for (Piece elem : pieceList) {
+                    if (elem.contains(e.getPoint())) {
+                        elem.mouseReleased(e);
+                        break;
+                    }
                 }
             }
         }
 
         @Override
         public void mouseEntered(MouseEvent e) {
-
         }
 
         @Override

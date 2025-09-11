@@ -217,6 +217,7 @@ public abstract class Piece extends Rectangle {
         GamePanel.selectedPiece.row = move.row;
         GamePanel.selectedPiece.hadFirstTurn = true;
         GamePanel.selectedPiece.numPreviousMoves++;
+        GamePanel.lastPieceThatMoved = GamePanel.selectedPiece;
 
         GamePanel.numTurns++;
 

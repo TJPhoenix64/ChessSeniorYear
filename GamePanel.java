@@ -21,6 +21,7 @@ public class GamePanel extends JPanel implements Runnable {
     static boolean showPsuedoMoves = false;
 
     public static Piece selectedPiece = null;
+    public static Piece lastPieceThatMoved = null;
 
     public static int numTurns = 1;
 
@@ -288,41 +289,48 @@ public class GamePanel extends JPanel implements Runnable {
                             }
                         }
                         // white en passant
-                        if (selectedPiece.type == 'p' && selectedPiece.row == 3 && selectedPiece.isWhite) {
-                            if (Piece.getPiece(selectedPiece.col - 1, selectedPiece.row) != null) {
 
-                                Piece piece = Piece.getPiece(selectedPiece.col - 1, selectedPiece.row);
-                                if (piece.type == 'p' && !piece.isWhite && piece.numPreviousMoves == 1) {
-                                    selectedPiece.teleportPiece(
-                                            new MoveOption(selectedPiece.col - 1, selectedPiece.row - 1));
-                                    pieceList.remove(piece);
-                                }
-                            }
-                            if (Piece.getPiece(selectedPiece.col + 1, selectedPiece.row) != null) {
-                                Piece piece = Piece.getPiece(selectedPiece.col + 1, selectedPiece.row);
-                                if (piece.type == 'p' && !piece.isWhite && piece.numPreviousMoves == 1) {
-                                    selectedPiece.teleportPiece(
-                                            new MoveOption(selectedPiece.col + 1, selectedPiece.row - 1));
-                                    pieceList.remove(piece);
-                                }
-                            }
-                        }
+                        if (selectedPiece.type == 'p') {
+                            if (selectedPiece.row == 3 && selectedPiece.isWhite) {
+                                if (Piece.getPiece(selectedPiece.col - 1, selectedPiece.row) != null) {
 
-                        if (selectedPiece.type == 'p' && selectedPiece.row == 4 && !selectedPiece.isWhite) {
-                            if (Piece.getPiece(selectedPiece.col + 1, selectedPiece.row) != null) {
-                                Piece piece = Piece.getPiece(selectedPiece.col + 1, selectedPiece.row);
-                                if (piece.type == 'p' && piece.isWhite && piece.numPreviousMoves == 1) {
-                                    selectedPiece.teleportPiece(
-                                            new MoveOption(selectedPiece.col + 1, selectedPiece.row + 1));
-                                    pieceList.remove(piece);
+                                    Piece piece = Piece.getPiece(selectedPiece.col - 1, selectedPiece.row);
+                                    if (piece.type == 'p' && !piece.isWhite && piece.numPreviousMoves == 1
+                                            && GamePanel.lastPieceThatMoved == piece) {
+                                        selectedPiece.teleportPiece(
+                                                new MoveOption(selectedPiece.col - 1, selectedPiece.row - 1));
+                                        pieceList.remove(piece);
+                                    }
+                                }
+                                if (Piece.getPiece(selectedPiece.col + 1, selectedPiece.row) != null) {
+                                    Piece piece = Piece.getPiece(selectedPiece.col + 1, selectedPiece.row);
+                                    if (piece.type == 'p' && !piece.isWhite && piece.numPreviousMoves == 1
+                                            && GamePanel.lastPieceThatMoved == piece) {
+                                        selectedPiece.teleportPiece(
+                                                new MoveOption(selectedPiece.col + 1, selectedPiece.row - 1));
+                                        pieceList.remove(piece);
+                                    }
                                 }
                             }
-                            if (Piece.getPiece(selectedPiece.col - 1, selectedPiece.row) != null) {
-                                Piece piece = Piece.getPiece(selectedPiece.col - 1, selectedPiece.row);
-                                if (piece.type == 'p' && piece.isWhite && piece.numPreviousMoves == 1) {
-                                    selectedPiece.teleportPiece(
-                                            new MoveOption(selectedPiece.col - 1, selectedPiece.row + 1));
-                                    pieceList.remove(piece);
+
+                            if (selectedPiece.row == 4 && !selectedPiece.isWhite) {
+                                if (Piece.getPiece(selectedPiece.col + 1, selectedPiece.row) != null) {
+                                    Piece piece = Piece.getPiece(selectedPiece.col + 1, selectedPiece.row);
+                                    if (piece.type == 'p' && piece.isWhite && piece.numPreviousMoves == 1
+                                            && GamePanel.lastPieceThatMoved == piece) {
+                                        selectedPiece.teleportPiece(
+                                                new MoveOption(selectedPiece.col + 1, selectedPiece.row + 1));
+                                        pieceList.remove(piece);
+                                    }
+                                }
+                                if (Piece.getPiece(selectedPiece.col - 1, selectedPiece.row) != null) {
+                                    Piece piece = Piece.getPiece(selectedPiece.col - 1, selectedPiece.row);
+                                    if (piece.type == 'p' && piece.isWhite && piece.numPreviousMoves == 1
+                                            && GamePanel.lastPieceThatMoved == piece) {
+                                        selectedPiece.teleportPiece(
+                                                new MoveOption(selectedPiece.col - 1, selectedPiece.row + 1));
+                                        pieceList.remove(piece);
+                                    }
                                 }
                             }
                         }

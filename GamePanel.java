@@ -18,6 +18,7 @@ public class GamePanel extends JPanel implements Runnable {
     static boolean canClick = true;
     static boolean mouseReleased = false;
     static boolean teleportPiece = false;
+    static boolean showPsuedoMoves = false;
 
     public static Piece selectedPiece = null;
 
@@ -131,6 +132,11 @@ public class GamePanel extends JPanel implements Runnable {
         for (MoveOption elem : selectedPieceMovesList) {
             elem.draw(g);
         }
+        if (showPsuedoMoves) {
+            for (MoveOption elem : psuedoLegalMovesList) {
+                elem.draw(g);
+            }
+        }
 
     }
 
@@ -191,7 +197,12 @@ public class GamePanel extends JPanel implements Runnable {
 
                 if (key == KeyEvent.VK_0) {
                     System.out.println("\nNumMoves: " + selectedPieceMovesList.size());
-                    System.out.println("Moves: " + selectedPieceMovesList);
+                    System.out.println("SelectedMoves: " + selectedPieceMovesList);
+                }
+
+                if (key == KeyEvent.VK_1) {
+                    System.out.println("\nNumMoves: " + psuedoLegalMovesList.size());
+                    System.out.println("PsuedoMoves: " + psuedoLegalMovesList);
                 }
             }
 
@@ -220,6 +231,10 @@ public class GamePanel extends JPanel implements Runnable {
                         System.out.println(Piece.getPiece(i).getBounds());
                     }
                 }
+            }
+            // toggles if you want to see psuedo moves
+            if (key == KeyEvent.VK_2) {
+                showPsuedoMoves = !showPsuedoMoves;
             }
 
         }

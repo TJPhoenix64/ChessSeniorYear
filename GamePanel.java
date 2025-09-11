@@ -240,7 +240,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             if (key == KeyEvent.VK_4) {
                 for (Piece elem : pieceList) {
-                    System.out.println(elem.getMoves());
+                    System.out.println(elem + " " + elem.getMoves() + " " + elem.getMoves().size());
                 }
             }
 

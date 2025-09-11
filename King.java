@@ -10,6 +10,7 @@ public class King extends Piece {
 
     BufferedImage blackKing;
     BufferedImage whiteKing;
+    public boolean isInCheck;
 
     public King(int displayX, int displayY, int id) {
         super(displayX, displayY, id, 'K');

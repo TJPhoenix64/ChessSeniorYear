@@ -57,8 +57,24 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public static void updatePsuedoMovesList() {
+        boolean isWhiteTurn = numTurns % 2 == 1;
+        King kingW = null;
+        King kingB = null;
         for (Piece elem : pieceList) {
             psuedoLegalMovesList.addAll(elem.getMoves());
+            if (elem.type == 'K') {
+                if (!elem.isWhite) {
+                    kingB = (King) elem;
+                } else {
+                    kingW = (King) elem;
+                }
+            }
+        }
+        if (psuedoLegalMovesList.isEmpty()) {
+            if (isWhiteTurn && !kingW.isInCheck) {
+                System.out.println("STALEMATE");
+            }
+
         }
     }
 

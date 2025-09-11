@@ -271,8 +271,7 @@ public class GamePanel extends JPanel implements Runnable {
                         }
 
                         // captures the piece it goes to
-                        for (int i = 0; i < pieceList.size(); i++) {
-                            Piece elem = pieceList.get(i);
+                        for (Piece elem : pieceList) {
                             // System.out.println("elem: " + elem + " " + i);
                             if (elem.contains(e.getPoint()) && selectedPiece != elem) {
                                 pieceList.remove(elem);

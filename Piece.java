@@ -229,6 +229,8 @@ public abstract class Piece extends Rectangle {
 
             }
         }
+
+        GamePanel.updatePsuedoMovesList();
     }
 
     /**

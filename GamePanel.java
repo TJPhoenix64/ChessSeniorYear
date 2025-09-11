@@ -53,6 +53,12 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
+    public static void updatePsuedoMovesList() {
+        for (Piece elem : pieceList) {
+            psuedoLegalMovesList.addAll(elem.getMoves());
+        }
+    }
+
     public void newPieces() {
         newPawns();
         newRooks();

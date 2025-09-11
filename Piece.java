@@ -215,11 +215,12 @@ public abstract class Piece extends Rectangle {
         GamePanel.selectedPiece.y = move.row * GamePanel.PIECE_SIZE;
         GamePanel.selectedPiece.col = move.col;
         GamePanel.selectedPiece.row = move.row;
+        GamePanel.selectedPiece.hadFirstTurn = true;
+        GamePanel.selectedPiece.numPreviousMoves++;
 
         GamePanel.numTurns++;
 
         if (GamePanel.selectedPiece.type == 'p') {
-
             if ((move.row == 0 && GamePanel.selectedPiece.isWhite)
                     || (move.row == 7 && !GamePanel.selectedPiece.isWhite)) {
                 Pawn pawn = new Pawn(GamePanel.selectedPiece.col, GamePanel.selectedPiece.row,
@@ -242,6 +243,8 @@ public abstract class Piece extends Rectangle {
         rook.y = move.row * GamePanel.PIECE_SIZE;
         rook.col = move.col;
         rook.row = move.row;
+        rook.hadFirstTurn = true;
+        rook.numPreviousMoves++;
     }
 
     public void mouseReleased(MouseEvent e) {

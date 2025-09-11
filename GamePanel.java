@@ -248,13 +248,9 @@ public class GamePanel extends JPanel implements Runnable {
                             if (moves.col == selectedPiece.col + 2) {
                                 Piece rook = Piece.getPiece(moves.col + 1, moves.row);
                                 rook.teleportPiece(rook, new MoveOption(moves.col - 1, moves.row));
-                                rook.hadFirstTurn = true;
-                                rook.numPreviousMoves++;
                             } else if (moves.col == selectedPiece.col - 2) {
                                 Piece rook = Piece.getPiece(moves.col - 2, moves.row);
                                 rook.teleportPiece(rook, new MoveOption(moves.col + 1, moves.row));
-                                rook.hadFirstTurn = true;
-                                rook.numPreviousMoves++;
                             }
                         }
                         // white en passant
@@ -279,10 +275,6 @@ public class GamePanel extends JPanel implements Runnable {
                             }
                         }
                         selectedPiece.teleportPiece(moves);
-                        System.out.println("Selected Piece: " + selectedPiece);
-
-                        selectedPiece.hadFirstTurn = true;
-                        selectedPiece.numPreviousMoves++;
 
                         // deselects piece and clears moves
                         selectedPiece = null;

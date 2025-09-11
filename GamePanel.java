@@ -72,7 +72,10 @@ public class GamePanel extends JPanel implements Runnable {
         }
         if (psuedoLegalMovesList.isEmpty()) {
             if (isWhiteTurn && !kingW.isInCheck) {
-                System.out.println("STALEMATE");
+                System.out.println("STALEMATE1");
+            }
+            if (!isWhiteTurn && !kingB.isInCheck) {
+                System.out.println("STALEMATE2");
             }
 
         }

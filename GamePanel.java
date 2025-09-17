@@ -20,6 +20,9 @@ public class GamePanel extends JPanel implements Runnable {
     static boolean teleportPiece = false;
     static boolean showPsuedoMoves = false;
 
+    public static King kingW = null;
+    public static King kingB = null;
+
     public static Piece selectedPiece = null;
     public static Piece lastPieceThatMoved = null;
 

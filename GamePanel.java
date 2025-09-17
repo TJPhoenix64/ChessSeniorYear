@@ -72,6 +72,31 @@ public class GamePanel extends JPanel implements Runnable {
                     kingW = (King) elem;
                 }
             }
+
+            if (kingW != null) {
+                if (elem.getMoves().contains(new MoveOption(kingW.col, kingW.row))) {
+                    System.out.println("Checking white king: " + elem);
+                }
+            }
+
+            if (kingB != null) {
+                if (elem.getMoves().contains(new MoveOption(kingB.col, kingB.row))) {
+                    System.out.println("Checking black king: " + elem);
+                }
+            }
+        }
+        if (psuedoLegalMovesList.contains(new MoveOption(kingW.col, kingW.row))) {
+            System.out.println("White King in check");
+            kingW.isInCheck = true;
+        } else {
+            kingW.isInCheck = false;
+        }
+
+        if (psuedoLegalMovesList.contains(new MoveOption(kingB.col, kingB.row))) {
+            System.out.println("Black King in check");
+            kingB.isInCheck = true;
+        } else {
+            kingB.isInCheck = false;
         }
         if (psuedoLegalMovesList.isEmpty()) {
             if (isWhiteTurn && !kingW.isInCheck) {

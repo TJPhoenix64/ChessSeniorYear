@@ -32,43 +32,35 @@ public class King extends Piece {
         }
     }
 
+    public ArrayList<MoveOption> moveMethod(int x, int y, boolean isWhite) {
+        ArrayList<MoveOption> answer = new ArrayList<>();
+        if (checkMove(x, y) && !moveIsContested(x, y, isWhite)) {
+            answer.add(new MoveOption(x, y));
+        }
+        return answer;
+    }
+
     @Override
     public ArrayList<MoveOption> getMoves() {
         ArrayList<MoveOption> answer = new ArrayList<>();
         int checkX = this.col + 1;
         int checkY = this.row + 1;
 
-        if (checkMove(checkX, checkY)) {
-            answer.add(new MoveOption(checkX, checkY));
-        }
+        answer.addAll(moveMethod(checkX, checkY, isWhite));
         checkX--;
-        if (checkMove(checkX, checkY)) {
-            answer.add(new MoveOption(checkX, checkY));
-        }
+        answer.addAll(moveMethod(checkX, checkY, isWhite));
         checkX--;
-        if (checkMove(checkX, checkY)) {
-            answer.add(new MoveOption(checkX, checkY));
-        }
+        answer.addAll(moveMethod(checkX, checkY, isWhite));
         checkY--;
-        if (checkMove(checkX, checkY)) {
-            answer.add(new MoveOption(checkX, checkY));
-        }
+        answer.addAll(moveMethod(checkX, checkY, isWhite));
         checkY--;
-        if (checkMove(checkX, checkY)) {
-            answer.add(new MoveOption(checkX, checkY));
-        }
+        answer.addAll(moveMethod(checkX, checkY, isWhite));
         checkX++;
-        if (checkMove(checkX, checkY)) {
-            answer.add(new MoveOption(checkX, checkY));
-        }
+        answer.addAll(moveMethod(checkX, checkY, isWhite));
         checkX++;
-        if (checkMove(checkX, checkY)) {
-            answer.add(new MoveOption(checkX, checkY));
-        }
+        answer.addAll(moveMethod(checkX, checkY, isWhite));
         checkY++;
-        if (checkMove(checkX, checkY)) {
-            answer.add(new MoveOption(checkX, checkY));
-        }
+        answer.addAll(moveMethod(checkX, checkY, isWhite));
 
         if (canCastle(col + 3, row)) {
             answer.add(new MoveOption(col + 2, row));

@@ -50,7 +50,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.setPreferredSize(SCREEN_SIZE);
         gameThread = new Thread(this);
         gameThread.start();
-        updatePsuedoMovesList();
 
         try {
             background = ImageIO.read(new File("Photos/chess-board.png"));

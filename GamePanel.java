@@ -59,11 +59,12 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public static void updatePsuedoMovesList() {
+        psuedoLegalMovesList.clear();
+        System.out.println("UPDATING MOVES LIST");
         boolean isWhiteTurn = numTurns % 2 == 1;
-        King kingW = null;
-        King kingB = null;
         for (Piece elem : pieceList) {
             psuedoLegalMovesList.addAll(elem.getMoves());
+
             if (elem.type == 'K') {
                 if (!elem.isWhite) {
                     kingB = (King) elem;

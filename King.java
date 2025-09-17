@@ -46,22 +46,37 @@ public class King extends Piece {
         int checkX = this.col + 1;
         int checkY = this.row + 1;
 
-        answer.addAll(moveMethod(checkX, checkY, isWhite));
+        if (!moveMethod(checkX, checkY, isWhite).isEmpty()) {
+            answer.addAll(moveMethod(checkX, checkY, isWhite));
+        }
         checkX--;
-        answer.addAll(moveMethod(checkX, checkY, isWhite));
+        if (!moveMethod(checkX, checkY, isWhite).isEmpty()) {
+            answer.addAll(moveMethod(checkX, checkY, isWhite));
+        }
         checkX--;
-        answer.addAll(moveMethod(checkX, checkY, isWhite));
+        if (!moveMethod(checkX, checkY, isWhite).isEmpty()) {
+            answer.addAll(moveMethod(checkX, checkY, isWhite));
+        }
         checkY--;
-        answer.addAll(moveMethod(checkX, checkY, isWhite));
+        if (!moveMethod(checkX, checkY, isWhite).isEmpty()) {
+            answer.addAll(moveMethod(checkX, checkY, isWhite));
+        }
         checkY--;
-        answer.addAll(moveMethod(checkX, checkY, isWhite));
+        if (!moveMethod(checkX, checkY, isWhite).isEmpty()) {
+            answer.addAll(moveMethod(checkX, checkY, isWhite));
+        }
         checkX++;
-        answer.addAll(moveMethod(checkX, checkY, isWhite));
+        if (!moveMethod(checkX, checkY, isWhite).isEmpty()) {
+            answer.addAll(moveMethod(checkX, checkY, isWhite));
+        }
         checkX++;
-        answer.addAll(moveMethod(checkX, checkY, isWhite));
+        if (!moveMethod(checkX, checkY, isWhite).isEmpty()) {
+            answer.addAll(moveMethod(checkX, checkY, isWhite));
+        }
         checkY++;
-        answer.addAll(moveMethod(checkX, checkY, isWhite));
-
+        if (!moveMethod(checkX, checkY, isWhite).isEmpty()) {
+            answer.addAll(moveMethod(checkX, checkY, isWhite));
+        }
         if (canCastle(col + 3, row)) {
             answer.add(new MoveOption(col + 2, row));
         }

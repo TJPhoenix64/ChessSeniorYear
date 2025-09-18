@@ -33,7 +33,7 @@ public class King extends Piece {
     }
 
     @Override
-    public ArrayList<MoveOption> getMoves() {
+    public ArrayList<MoveOption> getPsuedoMoves() {
         ArrayList<MoveOption> answer = new ArrayList<>();
         int checkX = this.col + 1;
         int checkY = this.row + 1;

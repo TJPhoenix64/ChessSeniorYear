@@ -63,7 +63,7 @@ public class GamePanel extends JPanel implements Runnable {
         System.out.println("UPDATING MOVES LIST");
         boolean isWhiteTurn = numTurns % 2 == 1;
         for (Piece elem : pieceList) {
-            psuedoLegalMovesList.addAll(elem.getMoves());
+            psuedoLegalMovesList.addAll(elem.getLegalMoves());
 
             if (elem.type == 'K') {
                 if (!elem.isWhite) {
@@ -74,13 +74,13 @@ public class GamePanel extends JPanel implements Runnable {
             }
 
             if (kingW != null) {
-                if (elem.getMoves().contains(new MoveOption(kingW.col, kingW.row))) {
+                if (elem.getLegalMoves().contains(new MoveOption(kingW.col, kingW.row))) {
                     System.out.println("Checking white king: " + elem);
                 }
             }
 
             if (kingB != null) {
-                if (elem.getMoves().contains(new MoveOption(kingB.col, kingB.row))) {
+                if (elem.getLegalMoves().contains(new MoveOption(kingB.col, kingB.row))) {
                     System.out.println("Checking black king: " + elem);
                 }
             }
@@ -289,8 +289,8 @@ public class GamePanel extends JPanel implements Runnable {
 
             if (key == KeyEvent.VK_4) {
                 for (Piece elem : pieceList) {
-                    System.out.println(elem + " " + elem.getMoves() + " " + elem.getMoves().size());
-                    for (MoveOption move : elem.getMoves()) {
+                    System.out.println(elem + " " + elem.getLegalMoves() + " " + elem.getLegalMoves().size());
+                    for (MoveOption move : elem.getLegalMoves()) {
                         if (move == new MoveOption(4, 6)) {
                             System.out.println("Can go to 4, 6: " + elem);
                         }

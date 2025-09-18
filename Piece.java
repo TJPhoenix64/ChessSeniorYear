@@ -175,7 +175,17 @@ public abstract class Piece extends Rectangle {
     public boolean moveIsContested(int moveX, int moveY, boolean isWhite) {
         for (Piece elem : GamePanel.pieceList) {
             if (elem.isWhite != isWhite) {
-                if (elem.getMoves().contains(new MoveOption(moveX, moveY))) {
+                if (elem instanceof King) {
+                    for (int dx = -1; dx <= 1; dx++) {
+                        for (int dy = -1; dy <= 1; dy++) {
+                            if (dx == 0 && dy == 0)
+                                continue;
+                            if (elem.x + dx == x && elem.y + dy == y) {
+                                return true;
+                            }
+                        }
+                    }
+                } else if (elem.getLegalMoves().contains(new MoveOption(moveX, moveY))) {
                     return true;
                 }
             }

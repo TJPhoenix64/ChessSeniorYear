@@ -35,40 +35,15 @@ public class King extends Piece {
     @Override
     public ArrayList<MoveOption> getPsuedoMoves() {
         ArrayList<MoveOption> answer = new ArrayList<>();
-        int checkX = this.col + 1;
-        int checkY = this.row + 1;
 
-        if (!moveMethod(checkX, checkY, isWhite).isEmpty()) {
-            answer.addAll(moveMethod(checkX, checkY, isWhite));
-        }
-        checkX--;
-        if (!moveMethod(checkX, checkY, isWhite).isEmpty()) {
-            answer.addAll(moveMethod(checkX, checkY, isWhite));
-        }
-        checkX--;
-        if (!moveMethod(checkX, checkY, isWhite).isEmpty()) {
-            answer.addAll(moveMethod(checkX, checkY, isWhite));
-        }
-        checkY--;
-        if (!moveMethod(checkX, checkY, isWhite).isEmpty()) {
-            answer.addAll(moveMethod(checkX, checkY, isWhite));
-        }
-        checkY--;
-        if (!moveMethod(checkX, checkY, isWhite).isEmpty()) {
-            answer.addAll(moveMethod(checkX, checkY, isWhite));
-        }
-        checkX++;
-        if (!moveMethod(checkX, checkY, isWhite).isEmpty()) {
-            answer.addAll(moveMethod(checkX, checkY, isWhite));
-        }
-        checkX++;
-        if (!moveMethod(checkX, checkY, isWhite).isEmpty()) {
-            answer.addAll(moveMethod(checkX, checkY, isWhite));
-        }
-        checkY++;
-        if (!moveMethod(checkX, checkY, isWhite).isEmpty()) {
-            answer.addAll(moveMethod(checkX, checkY, isWhite));
-        }
+        int[][] kingOffsets = {
+                { -1, -1 }, { 0, -1 }, { 1, -1 }, // top row
+                { -1, 0 }, { 1, 0 }, // sides
+                { -1, 1 }, { 0, 1 }, { 1, 1 } // bottom row
+        };
+
+        checkMoves(kingOffsets, answer, true);
+
         if (canCastle(col + 3, row)) {
             answer.add(new MoveOption(col + 2, row));
         }

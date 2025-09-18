@@ -33,49 +33,15 @@ public class Knight extends Piece {
     @Override
     public ArrayList<MoveOption> getPsuedoMoves() {
         ArrayList<MoveOption> answer = new ArrayList<>();
-        int checkX = this.col + 1;
-        int checkY = this.row - 2;
 
-        if (checkMove(checkX, checkY)) {
-            answer.add(new MoveOption(checkX, checkY));
-        }
-        checkX -= 2;
-        if (checkMove(checkX, checkY)) {
-            answer.add(new MoveOption(checkX, checkY));
-        }
+        int[][] knightOffsets = {
+                { 1, -2 }, { -1, -2 },
+                { -2, -1 }, { -2, 1 },
+                { -1, 2 }, { 1, 2 },
+                { 2, 1 }, { 2, -1 }
+        };
+        checkMoves(knightOffsets, answer, false);
 
-        checkX -= 1;
-        checkY += 1;
-        if (checkMove(checkX, checkY)) {
-            answer.add(new MoveOption(checkX, checkY));
-        }
-
-        checkY += 2;
-        if (checkMove(checkX, checkY)) {
-            answer.add(new MoveOption(checkX, checkY));
-        }
-
-        checkX += 1;
-        checkY += 1;
-        if (checkMove(checkX, checkY)) {
-            answer.add(new MoveOption(checkX, checkY));
-        }
-
-        checkX += 2;
-        if (checkMove(checkX, checkY)) {
-            answer.add(new MoveOption(checkX, checkY));
-        }
-
-        checkX += 1;
-        checkY -= 1;
-        if (checkMove(checkX, checkY)) {
-            answer.add(new MoveOption(checkX, checkY));
-        }
-
-        checkY -= 2;
-        if (checkMove(checkX, checkY)) {
-            answer.add(new MoveOption(checkX, checkY));
-        }
         return answer;
     }
 

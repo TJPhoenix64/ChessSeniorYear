@@ -32,14 +32,6 @@ public class King extends Piece {
         }
     }
 
-    public ArrayList<MoveOption> moveMethod(int x, int y, boolean isWhite) {
-        ArrayList<MoveOption> answer = new ArrayList<>();
-        if (checkMove(x, y) && !moveIsContested(x, y, isWhite)) {
-            answer.add(new MoveOption(x, y));
-        }
-        return answer;
-    }
-
     @Override
     public ArrayList<MoveOption> getMoves() {
         ArrayList<MoveOption> answer = new ArrayList<>();

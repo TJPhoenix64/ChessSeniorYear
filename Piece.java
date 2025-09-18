@@ -192,6 +192,27 @@ public abstract class Piece extends Rectangle {
         }
     }
 
+    public ArrayList<MoveOption> getLegalMoves() {
+        ArrayList<MoveOption> list = getPsuedoMoves();
+        ArrayList<MoveOption> legalMoves = new ArrayList<>();
+        MoveOption ogSquareMove = new MoveOption(col, row);
+        if (isPinned) {
+            // need to add a way to find if the new move will not move the piece outside of
+            // the pin
+            list.clear();
+        }
+        for (MoveOption move : list) {
+            teleportPiece(move);
+            King king = (this.isWhite) ? GamePanel.kingW : GamePanel.kingB;
+            if (!moveIsContested(king.col, king.row, king.isWhite)) {
+                legalMoves.add(move);
+            }
+
+            teleportPiece(ogSquareMove);
+        }
+        return legalMoves;
+    }
+
     protected void addMovesInDirection(ArrayList<MoveOption> answer, int startX, int startY, int dx, int dy, int id) {
         int checkX = startX + dx;
         int checkY = startY + dy;

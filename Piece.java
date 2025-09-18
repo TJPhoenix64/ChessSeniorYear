@@ -213,6 +213,27 @@ public abstract class Piece extends Rectangle {
         return legalMoves;
     }
 
+    /**
+     * condenses checking move code into simpler format, used in knight and king
+     * code
+     * 
+     * @param moveOffsets array of squares to check
+     * @param list        the list of moves that the method will change
+     */
+    public void checkMoves(int[][] moveOffsets, ArrayList<MoveOption> list, boolean isKing) {
+
+        for (int[] offset : moveOffsets) {
+            int checkX = this.col + offset[0];
+            int checkY = this.row + offset[1];
+            if (checkMove(checkX, checkY)) {
+                if (!isKing || !moveIsContested(checkX, checkY, isWhite)) {
+                    list.add(new MoveOption(checkX, checkY));
+                }
+            }
+        }
+
+    }
+
     protected void addMovesInDirection(ArrayList<MoveOption> answer, int startX, int startY, int dx, int dy, int id) {
         int checkX = startX + dx;
         int checkY = startY + dy;

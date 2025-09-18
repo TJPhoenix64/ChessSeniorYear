@@ -184,7 +184,7 @@ public abstract class Piece extends Rectangle {
     }
 
     public void addMoves() {
-        ArrayList<MoveOption> list = getMoves();
+        ArrayList<MoveOption> list = getLegalMoves();
         // System.out.println("ADDING MOVES");
         for (MoveOption elem : list) {
             GamePanel.selectedPieceMovesList.add(elem);

@@ -53,7 +53,7 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public ArrayList<MoveOption> getMoves() {
+    public ArrayList<MoveOption> getPsuedoMoves() {
         // System.out.println("This method is being run");
         ArrayList<MoveOption> answer = new ArrayList<>();
         int multiplier = -1;

@@ -41,7 +41,7 @@ public class Queen extends Piece {
     }
 
     @Override
-    public ArrayList<MoveOption> getMoves() {
+    public ArrayList<MoveOption> getPsuedoMoves() {
         ArrayList<MoveOption> answer = new ArrayList<>();
 
         Piece newPiece = getPiece(col, row);

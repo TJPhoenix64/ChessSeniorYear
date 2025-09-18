@@ -399,7 +399,7 @@ public abstract class Piece extends Rectangle {
         return (col >= 0 && col < GamePanel.NUM_TILES && row >= 0 && row < GamePanel.NUM_TILES);
     }
 
-    public abstract ArrayList<MoveOption> getMoves();
+    public abstract ArrayList<MoveOption> getPsuedoMoves();
 
     public abstract void draw(Graphics g);
 

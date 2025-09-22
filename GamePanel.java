@@ -65,25 +65,13 @@ public class GamePanel extends JPanel implements Runnable {
         for (Piece elem : pieceList) {
             psuedoLegalMovesList.addAll(elem.getLegalMoves());
 
-            if (elem.type == 'K') {
-                if (!elem.isWhite) {
-                    kingB = (King) elem;
-                } else {
-                    kingW = (King) elem;
-                }
+            if (elem.getLegalMoves().contains(new MoveOption(kingW.col, kingW.row))) {
+                System.out.println("Checking white king: " + elem);
+            }
+            if (elem.getLegalMoves().contains(new MoveOption(kingB.col, kingB.row))) {
+                System.out.println("Checking black king: " + elem);
             }
 
-            if (kingW != null) {
-                if (elem.getLegalMoves().contains(new MoveOption(kingW.col, kingW.row))) {
-                    System.out.println("Checking white king: " + elem);
-                }
-            }
-
-            if (kingB != null) {
-                if (elem.getLegalMoves().contains(new MoveOption(kingB.col, kingB.row))) {
-                    System.out.println("Checking black king: " + elem);
-                }
-            }
         }
         if (psuedoLegalMovesList.contains(new MoveOption(kingW.col, kingW.row))) {
             System.out.println("White King in check");
@@ -157,8 +145,10 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void newKings() {
-        pieceList.add(new King(4, 0, 31));
-        pieceList.add(new King(4, 7, 32));
+        kingB = new King(4, 0, 31);
+        kingW = new King(4, 7, 32);
+        pieceList.add(kingW);
+        pieceList.add(kingB);
     }
 
     @Override

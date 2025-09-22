@@ -147,9 +147,7 @@ public class Pawn extends Piece {
         ArrayList<MoveOption> answer = new ArrayList<>();
         int multiplier = -1;
 
-        Piece newPiece = getPiece(col, row);
-
-        int pieceId = newPiece.getId();
+        int pieceId = this.id;
         // System.out.println("PieceId: " + pieceId);
         if (pieceId > 8 && pieceId <= 16) {
             multiplier = 1;

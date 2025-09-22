@@ -159,7 +159,7 @@ public class Pawn extends Piece {
         addForwardMoves(moveX, moveY1, moveY2, answer);
 
         // capturing diagonally
-        addDiagMoves(moveX, moveY2, answer);
+        addDiagMoves(moveX, moveY1, answer);
 
         // en passant
         addEnpassantMoves(moveX, moveY1, answer);
@@ -169,7 +169,23 @@ public class Pawn extends Piece {
 
     @Override
     public ArrayList<MoveOption> getAttackingMoves() {
-        return getPsuedoMoves();
+        ArrayList<MoveOption> answer = new ArrayList<>();
+        int multiplier = -1;
+
+        if (isWhite) {
+            multiplier = 1;
+        }
+
+        int moveX = col;
+        int moveY1 = row - (1 * multiplier);
+
+        // capturing diagonally
+        addDiagMoves(moveX, moveY1, answer);
+
+        // en passant
+        addEnpassantMoves(moveX, moveY1, answer);
+
+        return answer;
     }
 
     public void promote() {

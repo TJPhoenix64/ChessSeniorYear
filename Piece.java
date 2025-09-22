@@ -469,6 +469,8 @@ public abstract class Piece extends Rectangle {
 
     public abstract ArrayList<MoveOption> getPsuedoMoves();
 
+    public abstract ArrayList<MoveOption> getAttackingMoves();
+
     public abstract void draw(Graphics g);
 
     public void mouseDragged(MouseEvent e) {

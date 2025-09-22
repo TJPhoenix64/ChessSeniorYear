@@ -160,6 +160,11 @@ public class Pawn extends Piece {
         return answer;
     }
 
+    @Override
+    public ArrayList<MoveOption> getAttackingMoves() {
+        return getPsuedoMoves();
+    }
+
     public void promote() {
         Piece piece = Piece.getPiece(this.col, this.row);
 

@@ -185,7 +185,7 @@ public abstract class Piece extends Rectangle {
                             }
                         }
                     }
-                } else if (elem.getLegalMoves().contains(new MoveOption(moveX, moveY))) {
+                } else if (elem.getPsuedoMoves().contains(new MoveOption(moveX, moveY))) {
                     return true;
                 }
             }

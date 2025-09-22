@@ -63,7 +63,7 @@ public class GamePanel extends JPanel implements Runnable {
         System.out.println("UPDATING MOVES LIST");
         boolean isWhiteTurn = numTurns % 2 == 1;
         for (Piece elem : pieceList) {
-            psuedoLegalMovesList.addAll(elem.getLegalMoves());
+            psuedoLegalMovesList.addAll(elem.getPsuedoMoves());
 
             if (elem.getLegalMoves().contains(new MoveOption(kingW.col, kingW.row))) {
                 System.out.println("Checking white king: " + elem);

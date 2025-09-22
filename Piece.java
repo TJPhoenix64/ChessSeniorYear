@@ -124,7 +124,7 @@ public abstract class Piece extends Rectangle {
                 if (GamePanel.selectedPieceMovesList.contains(move)) {
                     GamePanel.pieceList.remove(this);
                     System.out.println("Piece being removed: " + this);
-                    GamePanel.selectedPiece.teleportPiece(move);
+                    GamePanel.selectedPiece.teleportPiece(move, false);
                 } else {
                     System.out.println("THIS CODE IS BEING RUN - new piece selected");
                     GamePanel.selectedPiece = this;
@@ -271,7 +271,7 @@ public abstract class Piece extends Rectangle {
      * 
      * @param move the new location
      */
-    public void teleportPiece(MoveOption move) {
+    public void teleportPiece(MoveOption move, boolean isSimulated) {
         System.out.println("TELEPORTING PIECE");
 
         GamePanel.selectedPiece.x = move.col * GamePanel.PIECE_SIZE;
@@ -293,8 +293,9 @@ public abstract class Piece extends Rectangle {
 
             }
         }
-
-        GamePanel.updatePsuedoMovesList();
+        if (!isSimulated) {
+            GamePanel.updatePsuedoMovesList();
+        }
     }
 
     /**
@@ -358,7 +359,7 @@ public abstract class Piece extends Rectangle {
                 // if the move attempt is valid, move the piece
                 if (GamePanel.selectedPieceMovesList.contains(attempt)) {
                     System.out.println("TTHIS CODE RUNS");
-                    teleportPiece(attempt);
+                    teleportPiece(attempt, false);
                     // Clear selection and moves
                     GamePanel.selectedPieceMovesList.clear();
                     GamePanel.selectedPiece = null;

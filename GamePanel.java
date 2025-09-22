@@ -335,7 +335,7 @@ public class GamePanel extends JPanel implements Runnable {
                                     if (piece.type == 'p' && !piece.isWhite && piece.numPreviousMoves == 1
                                             && GamePanel.lastPieceThatMoved == piece) {
                                         selectedPiece.teleportPiece(
-                                                new MoveOption(selectedPiece.col - 1, selectedPiece.row - 1));
+                                                new MoveOption(selectedPiece.col - 1, selectedPiece.row - 1), false);
                                         pieceList.remove(piece);
                                     }
                                 }
@@ -344,7 +344,7 @@ public class GamePanel extends JPanel implements Runnable {
                                     if (piece.type == 'p' && !piece.isWhite && piece.numPreviousMoves == 1
                                             && GamePanel.lastPieceThatMoved == piece) {
                                         selectedPiece.teleportPiece(
-                                                new MoveOption(selectedPiece.col + 1, selectedPiece.row - 1));
+                                                new MoveOption(selectedPiece.col + 1, selectedPiece.row - 1), false);
                                         pieceList.remove(piece);
                                     }
                                 }
@@ -356,7 +356,7 @@ public class GamePanel extends JPanel implements Runnable {
                                     if (piece.type == 'p' && piece.isWhite && piece.numPreviousMoves == 1
                                             && GamePanel.lastPieceThatMoved == piece) {
                                         selectedPiece.teleportPiece(
-                                                new MoveOption(selectedPiece.col + 1, selectedPiece.row + 1));
+                                                new MoveOption(selectedPiece.col + 1, selectedPiece.row + 1), false);
                                         pieceList.remove(piece);
                                     }
                                 }
@@ -365,7 +365,7 @@ public class GamePanel extends JPanel implements Runnable {
                                     if (piece.type == 'p' && piece.isWhite && piece.numPreviousMoves == 1
                                             && GamePanel.lastPieceThatMoved == piece) {
                                         selectedPiece.teleportPiece(
-                                                new MoveOption(selectedPiece.col - 1, selectedPiece.row + 1));
+                                                new MoveOption(selectedPiece.col - 1, selectedPiece.row + 1), false);
                                         pieceList.remove(piece);
                                     }
                                 }
@@ -380,7 +380,7 @@ public class GamePanel extends JPanel implements Runnable {
                                 break;
                             }
                         }
-                        selectedPiece.teleportPiece(moves);
+                        selectedPiece.teleportPiece(moves, false);
 
                         // deselects piece and clears moves
                         selectedPiece = null;

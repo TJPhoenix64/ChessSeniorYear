@@ -52,6 +52,19 @@ public class Pawn extends Piece {
         }
     }
 
+    public boolean canMoveForwardOne(int moveX, int moveY1) {
+        if (moveX >= 0 && moveX <= GamePanel.NUM_TILES - 1) {
+            if (moveY1 >= 0 && moveY1 <= GamePanel.NUM_TILES - 1) {
+                return (!Piece.spaceIsOccupied(moveX, moveY1, this.id));
+            }
+        }
+        return false;
+    }
+
+    public boolean canMoveForwardTwo(int moveX, int moveY2) {
+        return (!Piece.spaceIsOccupied(moveX, moveY2, this.id));
+    }
+
     @Override
     public ArrayList<MoveOption> getPsuedoMoves() {
         // System.out.println("This method is being run");
@@ -75,29 +88,12 @@ public class Pawn extends Piece {
 
         // moving forward
 
-        if (moveX >= 0 && moveX <= GamePanel.NUM_TILES - 1) {
-            if (moveY1 >= 0 && moveY1 <= GamePanel.NUM_TILES - 1) {
-                if (!Piece.spaceIsOccupied(moveX, moveY1, pieceId)) {
-                    answer.add(new MoveOption(moveX, moveY1));
-                }
-            }
-            if ((moveY2 >= 0 && moveY2 <= GamePanel.NUM_TILES - 1)
-                    && (!Piece.spaceIsOccupied(moveX, moveY1, pieceId)) && !hadFirstTurn) {
-                if (!Piece.spaceIsOccupied(moveX, moveY2, pieceId)) {
-                    answer.add(new MoveOption(moveX, moveY2));
-                }
+        if (canMoveForwardOne(moveX, moveY1)) {
+            answer.add(new MoveOption(moveX, moveY1));
+            if (canMoveForwardTwo(moveX, moveY2)) {
+                answer.add(new MoveOption(moveX, moveY2));
             }
         }
-        /*
-         * // capturing diagonally
-         * if (checkMove(moveX, moveY1)) {
-         * answer.add(new MoveOption(moveX - 1, moveY1));
-         * }
-         * 
-         * if (checkMove(moveX, moveY1)) {
-         * answer.add(new MoveOption(moveX + 1, moveY1));
-         * }
-         */
 
         // capturing diagonally
         if (moveY1 >= 0 && moveY1 <= GamePanel.NUM_TILES - 1) {

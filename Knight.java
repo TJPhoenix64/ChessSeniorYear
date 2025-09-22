@@ -46,6 +46,11 @@ public class Knight extends Piece {
     }
 
     @Override
+    public ArrayList<MoveOption> getAttackingMoves() {
+        return getPsuedoMoves();
+    }
+
+    @Override
     public void draw(Graphics g) {
         switch (id) {
             case 27, 28 -> {

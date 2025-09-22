@@ -55,6 +55,11 @@ public class King extends Piece {
 
     }
 
+    @Override
+    public ArrayList<MoveOption> getAttackingMoves() {
+        return getPsuedoMoves();
+    }
+
     /**
      * checks if you can castle
      * 

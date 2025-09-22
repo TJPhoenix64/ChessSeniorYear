@@ -51,6 +51,11 @@ public class Bishop extends Piece {
     }
 
     @Override
+    public ArrayList<MoveOption> getAttackingMoves() {
+        return getPsuedoMoves();
+    }
+
+    @Override
     public void draw(Graphics g) {
         switch (id) {
             case 21, 22 -> {

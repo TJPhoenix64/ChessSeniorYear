@@ -67,6 +67,11 @@ public class Queen extends Piece {
     }
 
     @Override
+    public ArrayList<MoveOption> getAttackingMoves() {
+        return getPsuedoMoves();
+    }
+
+    @Override
     public void draw(Graphics g) {
         if (blackQueen != null && id == 25) {
             g.drawImage(blackQueen, super.x, super.y, width, height, null);

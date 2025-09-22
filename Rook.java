@@ -68,4 +68,9 @@ public class Rook extends Piece {
 
         return answer;
     }
+
+    @Override
+    public ArrayList<MoveOption> getAttackingMoves() {
+        return getPsuedoMoves();
+    }
 }

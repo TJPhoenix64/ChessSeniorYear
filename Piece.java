@@ -203,24 +203,39 @@ public abstract class Piece extends Rectangle {
     }
 
     public ArrayList<MoveOption> getLegalMoves() {
-        ArrayList<MoveOption> list = getPsuedoMoves();
+        ArrayList<MoveOption> psuedoMoveList = getPsuedoMoves();
         ArrayList<MoveOption> legalMoves = new ArrayList<>();
         MoveOption ogSquareMove = new MoveOption(col, row);
         if (isPinned) {
             // need to add a way to find if the new move will not move the piece outside of
             // the pin
-            list.clear();
+            psuedoMoveList.clear();
         }
-        for (MoveOption move : list) {
-            teleportPiece(move);
-            King king = (this.isWhite) ? GamePanel.kingW : GamePanel.kingB;
-            if (!moveIsContested(king.col, king.row, king.isWhite)) {
+        for (MoveOption move : psuedoMoveList) {
+            if (testMove(move, ogSquareMove)) {
                 legalMoves.add(move);
             }
-
-            teleportPiece(ogSquareMove);
         }
         return legalMoves;
+    }
+
+    /**
+     * temporarily teleports the piece and checks if its king is under attack
+     * 
+     * @param targetMove
+     * @param currentSpace
+     * @return
+     */
+    public boolean testMove(MoveOption targetMove, MoveOption currentSpace) {
+        boolean canMove = false;
+        teleportPiece(targetMove, true);
+        King king = (this.isWhite) ? GamePanel.kingW : GamePanel.kingB;
+        if (king != null && !moveIsContested(king.col, king.row, king.isWhite)) {
+            canMove = true;
+        }
+
+        teleportPiece(currentSpace, true);
+        return canMove;
     }
 
     /**
